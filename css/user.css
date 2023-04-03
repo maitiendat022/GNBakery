@@ -1,0 +1,117 @@
+#page-content{
+	padding: 50px 50px;
+}
+
+.content-header{
+	box-shadow: 1px 1px 2px 0px #00000040;
+	
+    background-color: white;
+    border-radius: 10px;
+
+   
+}
+*{
+	box-sizing: border-box;
+}
+.content-header h1{
+	
+    color:#FF1493;
+    
+
+    padding: 15px 10px;
+    font-size: 30px;
+    font-family: serif;
+    font-weight: bolder;
+}
+
+	.content-grid{
+		border-radius: 10px;
+		box-shadow: 1px 1px 2px 0px #00000040;
+	 padding: 15px;
+    background-color: white;
+		margin-top: 15px;
+		display: flex;
+		width: 100%;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	.content-grid-left{
+     width: 50%;
+	}
+	 .h4{
+		font-family: 'Merriweather', serif;
+		font-weight: 200;
+		font-size: 23px;
+	}
+	.content-grid-left p{
+		margin-top: 15px;
+		font-size: 16px;
+		font-family: sans-serif;
+		font-weight: 100;
+	}
+	.content-grid-right{
+		margin-left: 10px;
+		width: 43%;
+	}
+
+
+
+	@media only screen and (max-width: 450px){
+		.content-header h1{
+			font-size: 24px;
+		}
+		.content-grid-left{
+			width: 100%;
+		}
+		.content-grid-right{
+			margin-top: 30px;
+			width: 100%;
+		}
+		#page-content{
+	     padding:17px;
+         }
+        thead tr { 
+			
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+         }
+		 table td:before {
+			padding-right: 40px;
+			top: 0;
+			white-space: nowrap;
+		}
+		
+		 td:nth-of-type(1):before { content: "Đơn hàng"; font-size: 17px;font-weight: bold;  }
+	td:nth-of-type(2):before { content: "Thời gian đặt hàng";  font-size: 17px;font-weight: bold;
+	                           }
+	td:nth-of-type(3):before { content: "Tổng tiền";  font-size: 17px;font-weight: bold;}
+	td:nth-of-type(4):before { content: "Trạng thái"; font-size: 17px;font-weight: bold; }
+	td:nth-of-type(5):before { content: "Xem chi tiết";  font-size: 17px;font-weight: bold;}
+
+		
+		.table>:not(caption)>*>* {
+			font-size: 14px;
+		}
+		table ,tbody ,thead,tr,td,th
+		{display: block;}
+	}
+.table-sm>:not(caption)>*>* {
+	padding: 14px;
+	font-size: 19px;
+}
+.table>:not(caption)>*>* {
+	font-size: 19px;
+}
+	
+	
+	.detail-txt{
+	    padding-left: 1.3px;
+		color: #FF1493;
+	}
+	.detail-txt:hover{
+		color: #FFBFBF;
+	}
+	.text-address a{
+		color: #FF1493;
+	}

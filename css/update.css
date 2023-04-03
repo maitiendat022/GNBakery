@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&family=Roboto:ital,wght@0,400;0,700;1,100&display=swap');
+.header-right .list-item .item:hover{
+    color: white;
+}
+body{
+	line-height: normal !important;
+	font-size: 16px;
+	font-family: sans-serif;
+	color: black;
+	background-color: #f8f2e8;
+
+}
+*{
+	box-sizing: border-box;
+}
+
+/* nav */
+
+/* MAIN */
+.page_container{
+    background-color: #F8F2E8;
+	padding-bottom: 30px;
+
+    
+}
+.main_content{
+    height: 100%;
+    width: 800px;
+    margin: 0 auto;
+}
+h2 {
+    padding-top: 50px;
+    font-family: Playfair Display;  
+    color: #FF1493;
+
+}
+.form_name {
+    height: 70px;
+    width: 646px;
+    margin-top: 35px;
+    color: #333333;
+    font-family: Roboto;
+}
+.form_address {
+    height: 70px;
+    width: 646px;
+    margin-top: 30px;
+}
+label {
+    font-family: Roboto;
+    color: #333333;
+}
+.form_phone{
+    height: 70px;
+    width: 646px;
+    margin-top: 30px;
+}
+.btnUpdate{
+    background-color: white;
+    height: 45px;
+    width: 163px;
+    left: 563px;
+    top: 412px;
+    border-radius: 5px;
+    border: 1px solid #FF1493;
+    font-family: Playfair Display;
+    font-size: 24px;
+    font-weight: 400;
+    color: #FF1493;
+    margin-top: 27px;
+	
+}
+.btnUpdatet{
+	background-color: white;
+    height: 45px;
+    width: 163px;
+    left: 563px;
+    top: 412px;
+    border-radius: 5px;
+    border: 1px solid #FF1493;
+    font-family: Playfair Display;
+    font-size: 24px;
+    font-weight: 400;
+    color: #FF1493;
+    margin-top: 27px;
+	margin-left: 320px;
+}
+.btnup{
+	display: flex;
+	
+}
+/*reponsive*/
+
+@media screen and (max-width: 450px) {
+	body{
+		margin-left: 20px;
+	 background-color: #F8F2E8;
+	}
+	.main_content {
+		margin-left: 20px;
+	}
+    h2{
+		
+		font-size: 24px;
+	}
+	.form_address ,.form_name,.form_phone{
+		margin-top: 10px;
+		padding: 0;
+	}
+     .form_phone .form-control,
+	.form_address  .form-control,
+    .form_name .form-control{
+		width: 300px;
+	}
+    .form_address 
+  .container #main-menu li ul.sub-menu{
+	 display: none;
+  } 
+  .btnUpdate{
+	  margin: 0;
+	  width: 100px;
+	  height: 40px;
+	  font-size: 16px;
+  }
+  .btnUpdatet{
+	margin-left: 99px;
+	width: 100px;
+	height: 40px;
+	font-size: 16px;
+	margin-top: 0;
+  }
+ 
+ 
+	   #yBt{
+		 display: none;
+	   }
+	   #backtop{
+		 display: none;
+	   }
+	   footer {
+ 
+		 width: 100%;
+	  }
+	  footer .footer-top{
+		 width: 100%;
+	  }
+	   .menu, .subscribe ,.connect ,.contact-item {
+		padding: 0;
+		margin: 10px;
+		 width: 100%;
+	   }
+	   .contact-item .ft-contact-logo  {
+	 
+		 text-align: center;
+		 width: 80%;
+		 margin-left: 30px;
+	   }
+	   .ft-contact-tel , .ft-contact-email , .ft-contact-address,
+	   .menu .ft-menu .list a,
+	   .ft-subscribe p{
+		 font-size: 14px;
+		 font-weight: 100;
+		 font-family: sans-serif;
+	   }
+	   .menu{
+		 margin-top: 10px;
+	 
+	   }
+	   .menu .ft-menu h4,
+	   .subscribe .ft-subscribe-wrapper h4{
+		 font-size: 24px;
+		 font-family: serif;
+	   }
+	   .connect{
+		 margin-top: 10px;
+	   }
+	  .connect p{
+		 font-weight: bolder;
+		 font-size: 22px;
+		 font-family: sans-serif;
+	  }
+	 
+	
+	 
+ }
+
+ 
+@media only screen and (max-width: 700px){
+    
+ footer {
+
+    width: 100%;
+ }
+ footer .footer-top{
+    width: 100%;
+ }
+  .menu, .subscribe ,.connect ,.contact-item {
+   padding: 0;
+   margin: 10px;
+    width: 100%;
+  }
+  .contact-item .ft-contact-logo  {
+
+    text-align: center;
+    width: 80%;
+    margin-left: 30px;
+  }
+  .ft-contact-tel , .ft-contact-email , .ft-contact-address,
+  .menu .ft-menu .list a,
+  .ft-subscribe p{
+    font-size: 14px;
+    font-weight: 100;
+    font-family: sans-serif;
+  }
+  .menu{
+    margin-top: 10px;
+
+  }
+  .menu .ft-menu h4,
+  .subscribe .ft-subscribe-wrapper h4{
+    font-size: 24px;
+    font-family: serif;
+  }
+  .connect{
+    margin-top: 10px;
+  }
+ .connect p{
+    font-weight: bolder;
+    font-size: 22px;
+    font-family: sans-serif;
+ }
+
+
+
+}
+
+.ft-copyright{
+    margin-left: 30px;
+}
+.header-right .list-item .item{
+    text-decoration: none;
+}
+.header-right .list-item .item:hover{
+    color: white;
+}
+.input-group-btn .btn{
+    padding: 0;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,146 @@
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/cover1.jpg");
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    
+  }
+  
+  .hero-text {
+    font-size: 30px;
+    font-weight: bolder;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    
+  }
+ /* MAIN */
+ .main-container-header{
+     width: 100%;
+ }
+ .confirm-box{
+     margin: 50px 160px 10px 160px;
+ }
+ .form-page {
+    height: 100%;
+    width: 800px;
+    margin: 0 auto;
+ }
+.confirm-text{
+    font-family: Playfair Display;
+    font-size: 24px;
+    text-align: center;    
+    color: #FF1493;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.confirm-text p{
+    text-align: center;
+}
+.page_container{
+    justify-content: center;
+    height: 410px;
+ 
+    margin-left: 100px;
+}
+.main-container{
+    margin-left: 300px;
+}
+.form_name{
+    margin-top: 64px;
+    font-family: Roboto;
+    font-size: 16px;
+}
+.form_address{
+    margin-top: 38px;
+    font-family: Roboto;
+    font-size: 16px;
+}
+.form_phone{
+    margin-top: 41px;
+    font-family: Roboto;
+    font-size: 16px;
+}
+.btnReturn{
+    background-color: white;
+    height: 45px;
+    width: 163px;
+    border-radius: 5px;
+    border: 1px solid #FF1493;
+    font-family: Playfair Display;
+    font-size: 24px;
+    font-weight: 400;
+    color: #FF1493;
+    margin-top: 45px;
+    text-align: center;
+	
+}
+.btnConfirm{
+	background-color: white;
+    height: 45px;
+    width: 163px;
+    border-radius: 5px;
+    border: 1px solid #FF1493;
+    font-family: Playfair Display;
+    font-size: 24px;
+    font-weight: 400;
+    color: #FF1493;
+    margin-top: 45px;
+	margin-left: 380px;
+}
+.btnup a{
+    padding-top: 4px;
+}
+.btnup{
+	display: flex;
+	
+}
+.btnReturn:hover,
+.btnConfirm:hover{
+    color: #FFBFBF;
+}
+@media only screen and (max-width: 700px){
+    .confirm-box{
+        width: 100%;
+        margin: 30px 0px;
+        font-size: 19px;
+        
+    }
+    .form-page{
+        width: 100%;
+    }
+  
+   
+    .page_container{
+        
+        margin: 12px;
+    }
+    .btnConfirm{
+        margin-left: 0;
+    }
+    .btnConfirm,
+    .btnReturn{
+        width: 90px;
+        font-size: 17px;
+        height: 37px;
+        padding-top: 5;
+    }
+     .btnConfirm{
+          margin-left: 150px;
+    }
+   
+
+}
+label{
+    margin-bottom: 10px;
+    
+}
