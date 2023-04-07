@@ -4,6 +4,7 @@
     require_once '../navbar-vertical.php';
     require_once '../../database/connect.php';
 
+    $idUser = $_SESSION['id'];
     $page_current = 1;
     if(isset($_GET['page'])) {
         $page_current = $_GET['page'];
@@ -18,16 +19,18 @@
 
     $num_page = ceil($num_order / $num_order_per_page);
     $skip_page = $num_order_per_page * ($page_current - 1);
-    $sql = "SELECT orders.id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, status, users.name 
+    $sql = "SELECT orders.id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, orders.status,id_status, users.name 
     from orders
     join users on orders.user_id = users.id
     limit $num_order_per_page offset $skip_page";
     $result = mysqli_query($connect, $sql);
+
 ?>
 <div class="main__container">
     <div class="main-container-text d-flex align-items-center">
         <a class="header__name text-decoration-none" href="#">
             Đơn Hàng
+            <span><?= $idUser?></span>
         </a>
     </div>
 
@@ -77,11 +80,33 @@
                                         ?>
                                     </th>
                                     <th scope="col">
-                                        <div class="two_buttons">
-                                            <?php if($each['status'] == 2 || $each['status'] == 1) { }
-                                            else { ?>
-                                            <a href="./update.php?id=<?= $each['id'] ?>&status=1" class = "btnBrowser">Duyệt</a>
-                                            <a href="./update.php?id=<?= $each['id'] ?>&status=2">Hủy</a>
+                                        <div >
+                                            <?php
+                                            if(isset($each['id_status'])){
+                                                $id = $each['id_status'];
+                                                $sqlUser_status = "select * from users where id = '$id'";
+                                                $resultUser_status = mysqli_query($connect, $sqlUser_status);
+                                                $rowUser_status = mysqli_fetch_array($resultUser_status); 
+                                                $level = $rowUser_status['level'];
+                                            }                                           
+                                            if($each['status'] == 1 && $level ==1) {
+                                            ?> <span>Quản trị viên đã duyệt đơn</span>
+                                            <?php
+                                            }if($each['status'] == 2 && $level == 1){
+                                            ?><span>Quản trị viên đã hủy đơn</span>
+                                            <?php
+                                            }if($each['status'] == 1 && $level == 2){
+                                            ?><span>Nhân viên <a class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã duyệt đơn</span>
+                                            <?php
+                                            }if($each['status'] == 2 && $level == 2){
+                                            ?><span>Nhân viên <a class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã hủy đơn</span>
+                                            <?php
+                                            }
+                                            if($each['status'] == 0) { ?>
+                                            <div class="two_buttons">
+                                                <a href="./update.php?id=<?= $each['id'] ?>&status=1&idUser=<?= $idUser?>" class = "btnBrowser">Duyệt</a>
+                                                <a href="./update.php?id=<?= $each['id'] ?>&status=2&idUser=<?= $idUser?>">Hủy</a>
+                                            </div>   
                                             <?php } ?>
                                         </div>
                                      </th>

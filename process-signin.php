@@ -10,11 +10,9 @@
         if(mysqli_num_rows($result) > 0){
             $row = mysqli_fetch_assoc($result);
             $id = $row['id'];
-            $name = $row['name'];
             $pass_hash = $row['password'];
             if(password_verify($pass,$pass_hash)){
                 $_SESSION['id'] = $id;
-                $_SESSION['name'] = $name;
                 header("location:index.php");
             }else{
                 $error = "Incorrect account or password ";

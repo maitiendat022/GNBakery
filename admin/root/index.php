@@ -5,7 +5,7 @@
 
     require_once '../../database/connect.php';
 
-    $sql = "select count(*) from users where level = '1'";
+    $sql = "select count(*) from users where level = '2'";
     $admin = mysqli_query($connect, $sql);
     $admin_quantity = mysqli_fetch_array($admin)['count(*)'];
     $sql = "select count(*) from users where level = '0'";

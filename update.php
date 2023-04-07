@@ -45,24 +45,7 @@
                             <h2>Thông tin</h2>
                             Email:<span name = "email"> <?php echo $row['email'] ?></span>
                             <input type="text" name="id" style="display:none;" value = "<?php echo $row['id']?>">
-                            <small style="color:green;">
-                                    <?php
-                                        if(isset($_GET['error'])){
-                                            echo "{$_GET['error']}";
-                                        }else{
-                                            echo "";
-                                        }
-                                    ?>
-                    	        </small>
-                            <small style="color:red;">
-                                    <?php
-                                        if(isset($_GET['error1'])){
-                                            echo "{$_GET['error1']}";
-                                        }else{
-                                            echo "";
-                                        }
-                                    ?>
-                    	        </small>
+                            
                             <div class="form_name">
                                 <label for="">Họ và tên</label>
                                 <input type="text" name = "name" class="form-control" placeholder = "Nhập họ tên" value ="<?php echo $row['name']?>" required>

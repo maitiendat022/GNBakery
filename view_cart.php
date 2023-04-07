@@ -3,9 +3,17 @@
 require './database/connect.php';
 require 'check_user_cart.php';
 session_start();
+if(!isset($_GET['size-btn'])){
+  $size = 18;
+}
+else{
+  $size = $_GET['size-btn'];
+};
 $id = $_GET['id'];
-$sql = "select * from products
-  where id = $id";
+$sql = "select products.* ,price from products
+join products_size on products.id = products_size.product_id
+  where products.id = '$id' and products_size.size = $size";
+
 $result = mysqli_query($connect, $sql);
 $each = mysqli_fetch_array($result);
 
@@ -25,10 +33,9 @@ $item = [
   'id' =>$each['id'],
   'name' => $each['name'],
   'image' => $each['image'],
-  'size' => $each['size'],
+  'size' => $size,
   'price' => $each['price'],
   'quantity' => $quantity
-
 ];
 
 if($action == 'add'){

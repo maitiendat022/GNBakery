@@ -36,8 +36,10 @@ $last_order_id = mysqli_insert_id($connect);
 
 foreach($cart as $product_id => $each){
     $quantity = $each['quantity'];
-    $sql = "insert into order_product(order_id, product_id, quantity) 
-    values('$last_order_id', '$product_id', '$quantity')";
+    $size = $each['size'];
+    $price = $each['price'];
+    $sql = "insert into order_product(order_id, product_id, size, price, quantity) 
+    values('$last_order_id', '$product_id', $size, $price, '$quantity')";
     mysqli_query($connect, $sql);
 }
 

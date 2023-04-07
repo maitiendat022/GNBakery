@@ -8,6 +8,10 @@
     $sql = "select * from products, products_size where products.id = '$id' and products_size.product_id = '$id'";
     $result = mysqli_query($connect, $sql);
     $each = mysqli_fetch_array($result);
+
+    $sql = "SELECT price, size FROM products_size WHERE product_id = $id AND size = 18";
+    $result1 = $connect->query($sql);
+    $row = $result1->fetch_assoc();
 ?>
 
 <div class="main__container">
@@ -26,32 +30,20 @@
                 </div>
                 <hr>
                 
-                <form action="">
+                
                 <div class="product-price">
                     <p class="line-price">
                         <span class="">Giá: </span>
-                        <span class="ProductPrice" itemprop="price" content="220000">
-                            <?= number_format($each['price'], 0, '.', ' ') ?>&#8363
-                        </span>
+                        <span id="price"><?=$row['price']?></span>&#8363
                     </p>
 
                 </div>
-
-                <div class="product-select-swatch">
-                    <div class="product-select-swatch-text">
-                        <p>Kích Thước:</p>
-                    </div>
-                    <div class="select-swap">
-                        <div class="data-one">
-                            <input type="radio" name="option1" value="<?= $each['size'] ?>" class="input-opt">
-                            <button for="swatch" class="sd">
-                                <?= $each['size'] ?> cm
-                            </button>
-                        </div>
-                    </div>
+                <div>
+                    <span class="size-btn" data-size="18" data-id = "<?=$id?>">18 cm</span>
+                    <span class="size-btn" data-size="22" data-id = "<?=$id?>">22 cm</span>
+                    <span class="size-btn" data-size="26" data-id = "<?=$id?>">26 cm</span>   
                 </div>
-
-                </form>
+                
                 <div class="product-actions">
                     <a href="form_update.php?id=<?= $each['id'] ?>&admin_id=<?= $each['user_id'] ?>" id="AddToCart" class="btnAddtocart">Sửa</a>
                     <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="delete.php?id=<?= $each['id'] ?>&admin_id=<?= $each['user_id'] ?>" id="buy-now" class="btnBuynow">
@@ -90,7 +82,37 @@
     });
 
 </script>
-<script src="../../js/product.js"></script>
+<script>
+  const sizeButtons = document.querySelectorAll(".size-btn");
+  const priceSpan = document.getElementById("price");
+
+  const updatePrice = (size,id) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `get_price.php?size=${size}&id=${id}`, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const response = xhr.responseText;
+        const [price, size] = response.split("|");
+        priceSpan.innerHTML = price ;
+      }
+    };
+    xhr.send("size=" + size);
+  };
+
+  sizeButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const selectedSize = event.target.dataset.size;
+      const selectedId = event.target.dataset.id;
+      sizeButtons.forEach((button) => {
+      button.style.backgroundColor = ""; // Xóa màu nền của tất cả các thẻ kích thước
+    });
+        event.target.style.backgroundColor = "yellow"; // Thay đổi màu nền của thẻ kích thước được chọn
+        updatePrice(selectedSize, selectedId);
+    });
+  });
+  
+</script>
 </body>
 
 </html>

@@ -3,9 +3,16 @@
 require 'cart_function.php';
 require './database/connect.php';
 
-    
-    $sql = "select * from categories";
-    $categories = mysqli_query($connect, $sql);
+
+if(isset($_SESSION['id'])){
+  $id = $_SESSION['id'];
+  $sqlUser = "select * from users where id = '$id'";
+  $resultUser = mysqli_query($connect,$sqlUser);
+  $eachUser = mysqli_fetch_array($resultUser);
+}
+  
+$sql = "select * from categories";
+$categories = mysqli_query($connect, $sql);
 
 $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
 ?>
@@ -18,7 +25,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
           <div class="drawer_header">
-            <a href="#"><img style="width:40%;height: 40%;
+            <a href=""><img style="width:40%;height: 40%;
    margin-bottom: 15px;" src="img/logo.png"></a>
           </div>
 
@@ -43,7 +50,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
           <?php } else { ?>
               <a href="./user.php?id=<?= $each['id'] ?>">
               <i class="bi bi-people-fill" aria-hidden="true"></i>
-              Chào , <?= $_SESSION['name'] ?>
+              Chào , <?= $eachUser['name'] ?>
             </a>
             <a href="signout.php">
               <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
@@ -60,7 +67,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
 
         <div class="logo">
           <h1>
-            <a href="#">
+            <a href="./index.php">
               <img src="img/logo.png">
             </a>
           </h1>
@@ -127,7 +134,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
           <?php } else { ?>
               <a class="item" href="user.php">
               <i class="bi bi-people-fill" aria-hidden="true"></i>
-              Chào , <?= $_SESSION['name'] ?>
+              Chào , <?= $eachUser['name'] ?>
             </a>
             <a class="item" href="signout.php">
               <i class="bi bi-box-arrow-right" aria-hidden="true"></i>

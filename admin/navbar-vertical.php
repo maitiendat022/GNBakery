@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="nav-item navbar__item">
-                    <a class="nav-link d-flex align-items-center navbar__link <?= $page == 'employees'?'active':'' ?> ">
+                    <a class="nav-link d-flex align-items-center navbar__link <?= $page == 'users'?'active':'' ?> ">
                         <i class="navbar__link-icon bi bi-people-fill"></i>
                         <span>Tài khoản</span> 
                     </a>

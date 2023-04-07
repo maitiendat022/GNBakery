@@ -1,5 +1,9 @@
 <?php  
     session_start();
+    if(empty($_SESSION['id'])){
+        header('location:./signin.php');
+        exit();
+      }
     $id = $_POST['id'];
     $name = $_POST['name'];
     $pass = $_POST['password'];
@@ -10,8 +14,8 @@
     if($pass==""){
         $sql = "UPDATE users SET name='$name' ,address = '$address',phone = '$phone' WHERE id = '$id'";
         $result = mysqli_query($connect,$sql);
-        $error = "Cập nhật thông tin thành công !";
-        header("location: update.php?error=$error");
+        $_SESSION['success'] = 'Cập nhật thông tin thành công';
+        header("location: ./user.php");       
     }else{
         if(strlen($pass) < 6){
             $errorpass = "Password must be at least 6 characters long"; 
@@ -22,11 +26,10 @@
     
             $result = mysqli_query($connect,$sql);
             if(isset($result) > 0){
-                $error = "Cập nhật thông tin thành công !";
-                header("location: update.php?error=$error");
+                $_SESSION['success'] = 'Cập nhật thông tin thành công';
+                header("location: update.php");
             }else{
-                $error1 = "Update failed";
-                header("location: update.php?error1=$error1");
+                header("location: update.php");
             }
         }
     }

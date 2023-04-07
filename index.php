@@ -15,9 +15,10 @@
       $where = "products.name like '%$search%'";
   }
 
-  $sql = "SELECT products.*, category_detail.name as category_name FROM products
+  $sql = "SELECT products.*, category_detail.name as category_name , price FROM products
   join category_detail on category_detail.id = products.category_detail_id
-  where $where
+  join products_size on products.id = products_size.product_id
+  where $where and products_size.size = 18
   order by category_detail_id ASC, products.id desc";
 
   $result = mysqli_query($connect, $sql);

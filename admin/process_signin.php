@@ -18,7 +18,7 @@
                 $_SESSION['name'] = $name;
                 $_SESSION['level'] = $level;
                 $_SESSION['image'] = 'adminvjppro.jpg';
-                header("location:./products/index.php");
+                header("location:./root/index.php");
             }else{
                 $_SESSION['error'] = "Sai tài khoản hoặc mật khẩu";
                 header("location:index.php");
