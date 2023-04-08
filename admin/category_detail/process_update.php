@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../check_super_admin_signin.php';
+require_once '../check_super_admin_signin.php';
 if(empty($_POST['id'])) {
     $_SESSION['error'] = 'Không có dữ liệu để sửa!';
     header('location:index.php');
@@ -17,7 +17,7 @@ if(empty($_POST['name']) || $_POST['category']) {
 $name = $_POST['name'];
 $category = $_POST['category'];
 
-require_once '../../../database/connect.php';
+require_once '../../database/connect.php';
 
 
 $sql = "update category_detail

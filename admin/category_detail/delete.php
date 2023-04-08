@@ -1,5 +1,5 @@
 <?php 
-require_once '../../check_super_admin_signin.php';
+require_once '../check_super_admin_signin.php';
 if(empty($_GET['id'])) {
     $_SESSION['error'] = 'Phải chọn để xóa';
     header('location:index.php');
@@ -8,7 +8,7 @@ if(empty($_GET['id'])) {
 
 $id = $_GET['id'];
 
-require_once '../../../database/connect.php';
+require_once '../../database/connect.php';
 $sql = "delete from category_detail where id = '$id'";
 
 mysqli_query($connect, $sql);

@@ -1,5 +1,5 @@
 <?php
-require_once '../../check_super_admin_signin.php';
+require_once '../check_super_admin_signin.php';
 
 if(empty($_POST['name'])) {
     $_SESSION['error'] = 'Phải điền đầy đủ thông tin'; 
@@ -10,7 +10,7 @@ if(empty($_POST['name'])) {
 $name = $_POST['name'];
 $category = $_POST['category'];
 
-require_once '../../../database/connect.php';
+require_once '../../database/connect.php';
 
 $sql = "insert into category_detail(name, category_id)
 values(?,?)";

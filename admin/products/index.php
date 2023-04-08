@@ -81,7 +81,7 @@
                                 <?php foreach ($result as $each) { ?>
                                     <tr>
                                         <th scope="row">
-                                            <a href="show.php?id=<?= $each['id'] ?>" class="text-decoration-none"><?= $each['id'] ?></a>
+                                            <a href="show.php?id=<?= $each['id'] ?>" class="text-decoration-none"> SPGN<?= $each['id'] ?></a>
                                         </th>
                                         <td>
                                             <a href="show.php?id=<?= $each['id'] ?>" class="text-decoration-none"><?= $each['name'] ?></a>

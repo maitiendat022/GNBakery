@@ -40,10 +40,10 @@
                     <div class="sub-navbar">
                         <ul class="list-group">
                             <li class="sub-navbar__item">
-                                <a class="sub-navbar__link list-group-item-action text-decoration-none<?= $page == 'employees'?'active':'' ?>" href="../employees">Nhân viên</a>
+                                <a class="sub-navbar__link list-group-item-action text-decoration-none" href="../employees">Nhân viên</a>
                             </li>
                             <li class="sub-navbar__item">
-                                <a class="sub-navbar__link list-group-item-action text-decoration-none<?= $page == 'customers'?'active':'' ?>" href="../customer">Khách hàng</a>
+                                <a class="sub-navbar__link list-group-item-action text-decoration-none" href="../customer">Khách hàng</a>
                             </li>
                         </ul>
                     </div>

@@ -19,7 +19,7 @@
 
     $num_page = ceil($num_order / $num_order_per_page);
     $skip_page = $num_order_per_page * ($page_current - 1);
-    $sql = "Select * from users where level = 0
+    $sql = "Select * from users where level = 2
     limit $num_order_per_page offset $skip_page";
     $result = mysqli_query($connect, $sql);
 
@@ -30,13 +30,14 @@
         <div class="main-container-text d-flex align-items-center">
             <a class="header__name text-decoration-none" href="#">
                 <?= $page == 'root'?'Trang chủ':'' ?>
-                <?= $page == 'users'?'Khách hàng':'' ?>
+                <?= $page == 'users'?'Nhân viên':'' ?>
                 <?= $page == 'categories'?'Thể loại':'' ?>
                 <?= $page == 'products'?'Sản phẩm':'' ?>
                 <?= $page == 'orders'?'Đơn hàng':'' ?>
             </a>
         </div>
         <div class="container-fluid px-4">
+            <a href="form_insert.php" class="btn-insert btn btn-light btn-lg">Thêm</a>
             <div class="container-fluid">
             <div class="row gx-5">
                 <div class="col-12">
@@ -44,11 +45,13 @@
                         <table class="order_table table table-sm table-light align-middle">
                             <thead style = "text-align : center;">
                                 <tr>
-                                    <th scope="col">Mã khách hàng</th>
-                                    <th scope="col">Tên khách hàng</th>
+                                    <th scope="col">Mã nhân viên</th>
+                                    <th scope="col">Tên nhân viên</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Số điện thoại</th>
                                     <th  scope="col">Địa chỉ</th>
+                                    <th  scope="col">Giới tính</th>
+                                    <th   scope="col">Ngày sinh</th>
                                     <th  scope="col">Ngày tạo</th>
                                     <th  scope="col">Quản lý</th>
                                 </tr>
@@ -73,10 +76,13 @@
                                        <span class="nameofyou"><?= $each['address'] ?></span> 
                                     </th>
                                    
+                                    <th scope="col"><?= $each['gender'] ?></th>
+                                    <th scope="col" ><?=$each['birthday'] ?></th>
                                     <th scope="col" ><?=$each['created'] ?>
                                     <th scope="col">
                                         <div class="two_buttons">
                                             <?php if( $each['status'] == 1) { ?>
+                                            <a href="./update.php?id=<?= $each['id'] ?>&status=1" class = "btnBrowser">Sửa</a>
                                             <a href="./update.php?id=<?= $each['id'] ?>&status=2">Xóa</a>
                                             <?php } ?>
                                         </div>

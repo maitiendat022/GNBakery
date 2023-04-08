@@ -53,7 +53,7 @@
                             <?php foreach($result as $each){ ?>
                                 <tr>
                                     <th class ="id-numbers" scope="col">
-                                        <a style = "text-decoration:none; color:#333;"href="./detail.php?id=<?= $each['id'] ?>" >GN<?= $each['id'] ?></a>
+                                        <a style = "text-decoration:none; color:#333;"href="./detail.php?id=<?= $each['id'] ?>" >DHGN<?= $each['id'] ?></a>
                                     </th>
                                     <th scope="col">
                                         <span class = "nameofyou"><?= $each['name'] ?></span>

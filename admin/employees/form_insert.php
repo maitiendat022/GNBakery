@@ -15,13 +15,13 @@
     <div class="main__form">
         <div class="main-container-text d-flex align-items-center">
             <a class="header__name text-decoration-none" href="#">
-                Thêm sản phẩm
+                Thêm tài khoản nhân viên
             </a>
         </div>
         <div class=" container-fluid px-4">
             <?php include '../error_success.php' ?>
         
-            <div class="row gx-5">
+            <div class="row gx-5" style = "padding-right:1000px;padding-left:50px;">
                 <div class="col-12">
 
                     <form action="process_insert.php" method="post" enctype="multipart/form-data">
@@ -31,55 +31,33 @@
                         </div>
 
                         <div class="mb-4 fs-4">
-                        <label class="form-label fs-4" for="image" role="button">
-                            Ảnh bánh
-                            <img id="product__img" class="ms-4" src="../../assets/images/products/no-image.jpg" alt="Ảnh bánh" width="200" height="200"/>
-                        </label>
-                            <input type="file" hidden name="image" id="image" accept=".jpg, .png" class="form__input form-control"/>
+                            <label class="form-label" for="image">Email</label>
+                            <input type="email" name="email" id="email" class="form__input form-control"/>
                         </div>
                         <div class="mb-4 fs-4">
-                            <label class="form-label" for="image">Kích thước(cm)</label>
-                            <input type="number" name="size" id="size" class="form__input form-control"/>
+                            <label class="form-label" for="image">Mật khẩu</label>
+                            <input type="password" name="password" id="password" class="form__input form-control"/>
                         </div>
                         <div class="mb-4 fs-4">
-                            <label class="form-label" for="image">Giá(vnđ)</label>
-                            <input type="number" name="price" id="price" class="form__input form-control"/>
+                            <label class="form-label" for="image">Số điện thoại</label>
+                            <input type="number" name="phone" id="phone" class="form__input form-control"/>
                         </div>
-
                         <div class="mb-4 fs-4">
-                            <label class="form-label">Mô tả</label>
-                            <textarea name="description" class="form__input form-control"></textarea>
-                        </div>
-
-                        <div class="mb-4 fs-4">
-                            <label class="form-label">Loại bánh</label>
-                            <select class="form__select form-select" id="category">
-                                <option value="" selected disabled hidden>Chọn</option>
-                                <?php foreach ($result as $each) { ?>
-                                    <option value="<?= $each['id'] ?>">
-                                        <?= $each['name'] ?>
-                                    </option>
-                                <?php } ?>
+                            <label class="form-label" for="image">Địa chỉ</label>
+                            <input type="text" name="address" id="address" class="form__input form-control"/>
+                        </div><div class="mb-4 fs-4">
+                            <label class="form-label" for="image">Giới tính: </label><br>
+                            <select name="gender" id="gender" class="form__input form-control">
+                                <option value="">Nam</option>
+                                <option value="">Nữ</option>
                             </select>
-
-                            <select class="form__select form-select d-none mt-4" name="category" id="category_detail">
-                                <option value="" selected disabled hidden>Chọn</option>
-                                <?php 
-                                 $sql = "select * from category_detail where category_id = '$each[id]'";
-                                 $category_detail = mysqli_query($connect, $sql);
-                                foreach ($category_detail as $category_child) { ?>
-                                    <option 
-                                        value="<?= $category_child['id'] ?>"
-                                        class="category_detail"
-                                    >
-                                        <?= $category_child['name'] ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
+                        </div>
+                        <div class="mb-4 fs-4">
+                            <label class="form-label" for="image">Ngày sinh</label>
+                            <input type="date" name="birthday" id="birthday" class="form__input form-control"/>
+                        </div><div class="mb-4 fs-4">
 
                         <input type="hidden" name="admin_id" value="<?= $admin_id ?>">
-                        </div>
-
                         <button type="submit" class="form__btn btn mb-4">Thêm</button>
                     </form>
                 </div>

@@ -1,7 +1,7 @@
 <?php 
-    require_once '../../check_super_admin_signin.php';
+    require_once '../check_super_admin_signin.php';
     $page = 'categories';
-    require_once './navbar-vertical.php';
+    require_once '../navbar-vertical.php';
 
     if(empty($_GET['id'])) {
         $_SESSION['error'] = 'Không có dữ liệu để sửa!';
@@ -9,7 +9,7 @@
     }
 
     $id = $_GET['id'];
-    require_once '../../../database/connect.php';
+    require_once '../../database/connect.php';
     $sql = "select * from category_detail where id = '$id'";
     $result = mysqli_query($connect, $sql);
     $each = mysqli_fetch_array($result);
@@ -20,7 +20,7 @@
 ?>
     <div class="main__form">
         <div class=" container-fluid px-4">
-            <?php include '../../error_success.php' ?>
+            <?php include '../error_success.php' ?>
 
             <div class="row gx-5">
                 <div class="col-12">
@@ -49,6 +49,7 @@
                         </div>
 
                         <button type="submit" class="form__btn btn btn-dark mb-4">Sửa</button>
+                    </form>
 </div>
 
 </body>
