@@ -264,7 +264,7 @@ CREATE TABLE `users` (
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `gender` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `birthday` date DEFAULT NULL,
-  `created` date DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted` date DEFAULT NULL,
   `level` int NOT NULL,
   `status` int NOT NULL DEFAULT '1'
@@ -274,12 +274,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `gender`, `birthday`, `created`, `deleted`, `level`, `status`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2y$10$VGER95D9GaqeanD4mfTeuO2eKhfqYvV410CUU8CYbesNlK302LhR2', '0397170118', 'Thái Bình', NULL, NULL, '2023-03-15', NULL, 1, 1),
-(4, 'Dat', 'dat123@gmail.com', '$2y$10$poztTf2ykdqtJZhQ4sA/yO.sHznq4s3t95ur.MiBTLe3SKNveAVwC', '0397170118', 'Hà Nội', NULL, NULL, '2023-04-06', NULL, 0, 1),
-(5, 'Dat', 'maitiendat011@gmail.com', '$2y$10$EEDZVBFgODyx1PN7uiogS.lMKU.eQQVEGXZGMpkkpfJgYvrAJ0ZKG', '0397170118', 'Thái Bình', NULL, NULL, NULL, NULL, 0, 1),
-(10, 'Nhan Vien', 'nhanvientest@gmail.com', '$2y$10$poztTf2ykdqtJZhQ4sA/yO.sHznq4s3t95ur.MiBTLe3SKNveAVwC', '0397170118', 'Hà Nội', NULL, NULL, '2023-04-06', NULL, 2, 1),
-(11, 'Đạt', 'dat1234@gmail.com', '$2y$10$cVBvkMxEmSJgAs6nhRxTd.dcCg2lVxV7QPmUVas2Yp6zO4glPzfL.', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `gender`, `birthday`, `deleted`, `level`, `status`) VALUES
+(1, 'admin', 'admin@gmail.com', '$2y$10$VGER95D9GaqeanD4mfTeuO2eKhfqYvV410CUU8CYbesNlK302LhR2', '0397170118', 'Thái Bình', NULL, NULL,  NULL, 1, 1),
+(4, 'Dat', 'dat123@gmail.com', '$2y$10$poztTf2ykdqtJZhQ4sA/yO.sHznq4s3t95ur.MiBTLe3SKNveAVwC', '0397170118', 'Hà Nội', NULL, NULL,  NULL, 0, 1),
+(5, 'Dat', 'maitiendat011@gmail.com', '$2y$10$EEDZVBFgODyx1PN7uiogS.lMKU.eQQVEGXZGMpkkpfJgYvrAJ0ZKG', '0397170118', 'Thái Bình', NULL, NULL,  NULL, 0, 1),
+(10, 'Nhan Vien', 'nhanvientest@gmail.com', '$2y$10$poztTf2ykdqtJZhQ4sA/yO.sHznq4s3t95ur.MiBTLe3SKNveAVwC', '0397170118', 'Hà Nội', NULL, NULL,  NULL, 2, 1),
+(11, 'Đạt', 'dat1234@gmail.com', '$2y$10$cVBvkMxEmSJgAs6nhRxTd.dcCg2lVxV7QPmUVas2Yp6zO4glPzfL.', NULL, NULL, NULL, NULL, NULL, 0, 1);
 
 --
 -- Indexes for dumped tables

@@ -1,6 +1,6 @@
 <?php 
     require_once '../check_admin_signin.php';
-
+    session_start();
     $admin_id = $_SESSION['id'];
     $page = 'products-insert';
     require_once '../navbar-vertical.php';
@@ -9,8 +9,8 @@
 
     $sql = "select * from categories";
     $result = mysqli_query($connect, $sql);
+    
 
-   
 ?>
     <div class="main__form">
         <div class="main-container-text d-flex align-items-center">
@@ -62,19 +62,15 @@
                                 <?php } ?>
                             </select>
 
-                            <select class="form__select form-select d-none mt-4" name="category" id="category_detail">
+                            <select class="form__select form-select mt-4" name="category" id="category_detail">
                                 <option value="" selected disabled hidden>Chọn</option>
-                                <?php 
-                                 $sql = "select * from category_detail where category_id = '$each[id]'";
-                                 $category_detail = mysqli_query($connect, $sql);
-                                foreach ($category_detail as $category_child) { ?>
-                                    <option 
-                                        value="<?= $category_child['id'] ?>"
+                                <option 
+                            
+                                        value=""
                                         class="category_detail"
                                     >
-                                        <?= $category_child['name'] ?>
+                                        
                                     </option>
-                                <?php } ?>
                             </select>
 
                         <input type="hidden" name="admin_id" value="<?= $admin_id ?>">
@@ -91,41 +87,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    $(document).ready(function() {
-        $('#category').change(function() {
-            let category_id = $(this).val();
-            $.ajax({
-                url: './get_category_detail.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {category_id}
-            })
 
-            .done(function(res) {
-                const arrId = Object.keys(res);
-                const arrName = Object.values(res);
-                   
-                $('#category_detail').removeClass('d-none');
-                for (let i = 0; i < arrId.length; i++) {
-                    $('#category_detail').append(`
-                        <option value="${arrId[i]}">${arrName[i]}</option>
-                    `);
-                }
-            })
-         
-        });
-        
-        $('#image').change(function(e) {
-            $('#product__img').attr('src', URL.createObjectURL(e.target.files[0]));
-        });
-
-        $('.btn-menu').click(function() {
-            $('.navbar-vertical-mobile').toggle("fast");
-            $('.header__navbar-overlay').toggle("fast");
-        });
-    });
-</script>
 </body>
 
 </html>

@@ -47,9 +47,9 @@
                             <input type="text" name="address" id="address" class="form__input form-control"/>
                         </div><div class="mb-4 fs-4">
                             <label class="form-label" for="image">Giới tính: </label><br>
-                            <select name="gender" id="gender" class="form__input form-control">
-                                <option value="">Nam</option>
-                                <option value="">Nữ</option>
+                            <select style = "width:60px;" name="gender" id="gender" class="form__input form-control">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
                             </select>
                         </div>
                         <div class="mb-4 fs-4">

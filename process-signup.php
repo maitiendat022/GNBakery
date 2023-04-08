@@ -5,7 +5,7 @@
         $pass = $_POST['password'];
         require './database/connect.php';
 
-        $sqlEmail = "SELECT * FROM users WHERE email = '$email' ";
+        $sqlEmail = "SELECT * FROM users WHERE email = '$email' and level = 0 ";
         $resultEmail = mysqli_query($connect,$sqlEmail);
         if(mysqli_num_rows($resultEmail) > 0){
             $error = "Email already exists. Please enter another email"; 

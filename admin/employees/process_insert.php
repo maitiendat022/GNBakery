@@ -1,73 +1,53 @@
 <?php
-require_once '../check_admin_signin.php';
-$gender = $_POST['gender'];
-echo($gender) ;
-// if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['phone']) || empty($_POST['admin_id']) || $_FILES['image']['size'] == 0) {
-//     $_SESSION['error'] = 'Phải điền đầy đủ thông tin';
-//     header('location:form_insert.php');
-//     exit();
-// }
+session_start();
+if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['phone']) || empty($_POST['address']) || empty($_POST['gender']) || empty($_POST['birthday']) || empty($_POST['admin_id'])) {
+    $_SESSION['error'] = 'Phải điền đầy đủ thông tin';
+    header('location:form_insert.php');
+    exit();
+}
 
-// $name = $_POST['name'];
-// $size = $_POST['size'];
-// $price = $_POST['price'];
-// $image = $_FILES['image'];
-// $description = $_POST['description'];
-// $category = $_POST['category'];
-// $admin_id = $_POST['admin_id'];
+$name = $_POST['name'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$phone = $_POST['phone'];
+$address = $_POST['address'];
+$gender= $_POST['gender'];
+$birthday = $_POST['birthday'];
+$admin_id = $_POST['admin_id'];
+$level = 2;
+require_once '../../database/connect.php';
+$sqlEmail = "SELECT * FROM users WHERE email = '$email' and level = 2";
+$resultEmail = mysqli_query($connect,$sqlEmail);
+if(mysqli_num_rows($resultEmail) > 0){
+    $_SESSION['error'] = 'Email đã tồn tại'; 
+    header('location:form_insert.php');
+    exit();
+}
+if(strlen($password) < 6){
+    $_SESSION['error'] = 'Mật khẩu phải dài hơn 6 kí tự'; 
+    header('location:form_insert.php');
+}          
+$pass_hash = password_hash($password, PASSWORD_DEFAULT);
+       
+$sql = "insert into users(name, email, password, phone, address, gender, birthday, level)
+values(?, ?, ?, ?, ?, ?, ?, ?)";
 
-// if(!is_int($price)) {
-//     $_SESSION['error'] = 'Giá phải là số!'; 
-//     header('location:form_insert.php');
-//     exit();
-// }
-// else if($price <= 0) {
-//     $_SESSION['error'] = 'Giá phải lớn hơn 0!'; 
-//     header('location:form_insert.php');
-//     exit();
-// }
+$stmt = mysqli_prepare($connect, $sql);
+if($stmt) {
+    mysqli_stmt_bind_param($stmt, 'sssssssi', $name, $email, $pass_hash, $phone, $address, $gender, $birthday, $level);
+    mysqli_stmt_execute($stmt);
 
-// // Ảnh
-// $folder = '../../assets/images/products/';
-// $path = $image['name'];
-// $file_extension = pathinfo($path, PATHINFO_EXTENSION);
-// $file_type = array("jpg", "jpeg", "png");
+    $_SESSION['success'] = 'Đã thêm thành công';
+    die($_SESSION['success']);
+}
+else {
+    $_SESSION['error'] = 'Không thể chuẩn bị truy vấn!';
+    die($_SESSION['error']);
+    header('location:form_insert.php');
+    exit();
+}
 
-// if ($image["size"] > 1000000) {
-//     $_SESSION['error'] = 'File của bạn quá lớn!'; 
-//     header('location:form_insert.php');
-//     exit();
-// }
+mysqli_stmt_close($stmt);
+mysqli_close($connect);
 
-// if(!in_array("$file_extension", $file_type)) {
-//     $_SESSION['error'] = 'Chỉ cho phép file dạng .JPG, .PNG, .JPEG'; 
-//     header('location:form_insert.php');
-//     exit();
-// }
-
-// $file_name = 'cake_' . time() . '.' . $file_extension;
-// $path_file = $folder . $file_name;
-// move_uploaded_file($image['tmp_name'], $path_file);
-
-// require_once '../../database/connect.php';
-
-// $sql = "insert into products(name, image, size, price, description, category_detail_id, user_id)
-// values(?, ?, ?, ?, ?, ?, ?)";
-
-// $stmt = mysqli_prepare($connect, $sql);
-// if($stmt) {
-//     mysqli_stmt_bind_param($stmt, 'ssiisii', $name, $file_name, $size, $price, $description, $category, $admin_id);
-//     mysqli_stmt_execute($stmt);
-
-//     $_SESSION['success'] = 'Đã thêm thành công';
-// }
-// else {
-//     $_SESSION['error'] = 'Không thể chuẩn bị truy vấn!';
-//     header('location:form_insert.php');
-//     exit();
-// }
-
-// mysqli_stmt_close($stmt);
-// mysqli_close($connect);
-
-// header('location:form_insert.php');
+header('location:form_insert.php');

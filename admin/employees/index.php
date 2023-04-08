@@ -19,7 +19,7 @@
 
     $num_page = ceil($num_order / $num_order_per_page);
     $skip_page = $num_order_per_page * ($page_current - 1);
-    $sql = "Select * from users where level = 2
+    $sql = "Select *,DATE_FORMAT(created, '%Y/%m/%d') as date from users where level = 2
     limit $num_order_per_page offset $skip_page";
     $result = mysqli_query($connect, $sql);
 
@@ -78,7 +78,7 @@
                                    
                                     <th scope="col"><?= $each['gender'] ?></th>
                                     <th scope="col" ><?=$each['birthday'] ?></th>
-                                    <th scope="col" ><?=$each['created'] ?>
+                                    <th scope="col" ><?= $each['date']?>
                                     <th scope="col">
                                         <div class="two_buttons">
                                             <?php if( $each['status'] == 1) { ?>
