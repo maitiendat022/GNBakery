@@ -1,5 +1,5 @@
 <?php
-require_once '../check_super_admin_signin.php';
+require_once '../check_admin_signin.php';
 
 if(empty($_POST['name'])) {
     $_SESSION['error'] = 'Phải điền đầy đủ thông tin'; 

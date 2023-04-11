@@ -27,6 +27,7 @@ $sum = 0;
                             <tr>
                                 <th class="name-product" scope="col">Tên sản phẩm</th>
                                 <th class="pic-product" scope="col">Ảnh</th>
+                                <th class="price-product" scope="col">Kích thước</th>
                                 <th class="price-product" scope="col">Giá</th>
                                 <th class="amount-product" scope="col">Số lượng</th>
                                 <th class="payment" scope="col">Thành tiền</th>
@@ -41,6 +42,7 @@ $sum = 0;
                                     <th class="detail_product-item" scope="col">
                                         <img class="img_prd" src="../../assets/images/products/<?= $each['image'] ?>" alt="">
                                     </th>
+                                    <th class="detail_product-item" scope="col"><?= $each['size'] ?>cm</th>
                                     <th class="detail_product-item" style="font-weight:600; font-family: Roboto;" scope="col">
                                     <?= number_format($each['price'], 0, '.', ' ') ?>&#8363
                                     </th>

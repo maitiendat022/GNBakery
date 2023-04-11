@@ -1,6 +1,6 @@
 <?php
 
-require_once '../check_super_admin_signin.php';
+require_once '../check_admin_signin.php';
 if(empty($_POST['id'])) {
     $_SESSION['error'] = 'Không có dữ liệu để sửa!';
     header('location:index.php');
@@ -8,7 +8,7 @@ if(empty($_POST['id'])) {
 }
 
 $id = $_POST['id'];
-if(empty($_POST['name']) || $_POST['category']) {
+if(empty($_POST['name']) || empty($_POST['category'])) {
     $_SESSION['error'] = 'Phải điền đầy đủ thông tin!';
     header("location:form_update.php?id=$id");
     exit();

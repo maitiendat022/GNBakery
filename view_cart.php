@@ -2,25 +2,19 @@
 
 require './database/connect.php';
 require 'check_user_cart.php';
-session_start();
-if(!isset($_GET['size-btn'])){
-  $size = 18;
-}
-else{
-  $size = $_GET['size-btn'];
-};
+
+
+$size = $_GET['size-btn'];
+
 $id = $_GET['id'];
 $sql = "select products.* ,price from products
 join products_size on products.id = products_size.product_id
-  where products.id = '$id' and products_size.size = $size";
+where products.id = '$id' and products_size.size = $size";
 
 $result = mysqli_query($connect, $sql);
 $each = mysqli_fetch_array($result);
 
 $action =(isset($_GET['action'])) ? $_GET['action'] : 'add';
-
-
-
 
 $quantity = (isset($_GET['quantity'])) ? $_GET['quantity'] : 1;
 //session_destroy();

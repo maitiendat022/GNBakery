@@ -88,9 +88,12 @@
                   
                   <div class="cart__remove">
                     <small><?php echo $value['size'] ?>cm</small><br>
-                    <a class="btn-text" onclick="return confirm('Bạn chắc chắn muốn xóa?')" style="color:red;" href="view_cart.php?id=<?php echo $value['id'] ?>&action=delete">
-                      Xoá
-                    </a>
+                  <form action="view_cart.php" method = "GET">
+                    <input type="hidden" name="id" value="<?php echo $value['id'] ?>" >
+                    <input type="hidden" name="size-btn" id="save-size" value="<?=$value['size']?>" >
+                    <input type="hidden" name="action" id="save-size" value="delete" >
+                    <button onclick="return confirm('Bạn chắc chắn muốn xóa?')"  class="btn-text" style= "border:none;background-color:  #f8f2e8;" type= "submit">Xóa</button>
+                  </form>  
                   </div>
                 </td>
                 <td class="item-content-price" data-label="Đơn giá">
@@ -135,7 +138,7 @@
               <span class="cartt__subtotal"><?php echo number_format(total_price($cart)) ?>&#8363</span>
             </p>
 
-              <a class="btn-payment-text" href="./confirminfo.php">
+              <a class="btn-payment-text" href="./test.php">
                 Đặt hàng
               </a>
 

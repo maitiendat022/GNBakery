@@ -40,7 +40,8 @@
             <div class="container-fluid">
             <div class="row gx-5">
                 <div class="col-12">
-                    <div class="table-responsive-sm">
+                    <?php include '../error_success.php' ?>
+                    <div class="table-responsive-sm">   
                         <table class="order_table table table-sm table-light align-middle">
                             <thead style = "text-align : center;">
                                 <tr>
@@ -57,7 +58,7 @@
                             <?php foreach($result as $each){ ?>
                                 <tr>
                                     <th class ="id-numbers" scope="col">
-                                        <a style = "text-decoration:none; color:#333;"href="./detail.php?id=<?= $each['id'] ?>" >NVGN<?= $each['id'] ?></a>
+                                        <a style = "text-decoration:none; color:#333;"href="" >KHGN<?= $each['id'] ?></a>
                                     </th>
                                     <th scope="col">
                                         <span class = "nameofyou"><?= $each['name'] ?></span>
@@ -76,11 +77,28 @@
                                     <th scope="col" ><?=$each['date'] ?>
                                     <th scope="col">
                                         <div class="two_buttons">
-                                            <?php if( $each['status'] == 1) { ?>
-                                            <a href="./update.php?id=<?= $each['id'] ?>&status=2">Xóa</a>
-                                            <?php } ?>
+                                            <?php if($each['status'] == 1) { ?>
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="./update_status.php?id=<?= $each['id'] ?>&status=1">Xóa</a>
+                                            <?php }if($each['status'] == 0) { 
+                                                    $idLevel = $each['id_deleted'];
+                                                    $sqlLevel = "select level from users where id = $idLevel";
+                                                    $resultLevel = mysqli_query($connect, $sqlLevel);
+                                                    $row = mysqli_fetch_assoc($resultLevel);
+                                                    $level = $row["level"];
+                                                    if($level == 1){?>
+                                                        <span>Quản trị viên đã xóa</span>
+                                                    <?php
+                                                    }if($level == 2){?>
+                                                        <span>NVGN<?=$each['id_deleted']?> đã xóa</span>
+                                                    <?php
+                                                    }?>
                                         </div>
-                                     </th>
+
+                                        <div>
+                                            <a style = "text-decoration: none;"  onclick="return confirm('Bạn chắc chắn muốn khôi phục?')" href="./update_status.php?id=<?= $each['id'] ?>&status=0&level=<?=$level?>">Khôi phục</a>
+                                        <?php } ?>
+                                        </div>
+                                    </th>
                                 </tr>
                             <?php } ?>
                             </tbody>

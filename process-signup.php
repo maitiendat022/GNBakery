@@ -8,11 +8,11 @@
         $sqlEmail = "SELECT * FROM users WHERE email = '$email' and level = 0 ";
         $resultEmail = mysqli_query($connect,$sqlEmail);
         if(mysqli_num_rows($resultEmail) > 0){
-            $error = "Email already exists. Please enter another email"; 
+            $error = "Email đã tồn tại"; 
             header("location:signup.php?error=$error");
         }else{
             if(strlen($pass) < 6){
-                $errorpass = "Password must be at least 6 characters long"; 
+                $errorpass = "Mật khẩu tối thiểu 6 kí tự"; 
                 header("location:signup.php?errorpass=$errorpass");
             }else{
                 $pass_hash = password_hash($pass, PASSWORD_DEFAULT);

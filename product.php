@@ -4,9 +4,7 @@ session_start();
 require_once './database/connect.php';
 
 $id = $_GET['id'];
-$sql = "select products.* ,price from products
-join products_size on products.id = products_size.product_id
-  where products.id = '$id' and products_size.size = 18";
+$sql = "select *  from products where products.id = '$id' ";
 $result = mysqli_query($connect, $sql);
 $each = mysqli_fetch_array($result);
 
@@ -16,9 +14,23 @@ join products_size on products.id = products_size.product_id
   where category_detail_id = '$category_id' and products_size.size = 18";
 $result_category = mysqli_query($connect, $sql);
 
-$sql = "SELECT price, size FROM products_size WHERE product_id = $id AND size = 18";
-$result1 = $connect->query($sql);
-$row = $result1->fetch_assoc()
+$sql = "SELECT size, price
+FROM products_size
+WHERE product_id = $id
+ORDER BY size ASC, price ASC
+LIMIT 1";
+$resultprice = mysqli_query($connect, $sql);
+$eachprice = mysqli_fetch_array($resultprice);
+
+$sql = "SELECT size FROM products_size WHERE product_id = $id ORDER BY size ASC";
+$result = mysqli_query($connect, $sql);
+$sizes = array();
+if(mysqli_num_rows($result) > 0) {
+  while($row = mysqli_fetch_assoc($result)) {
+    // Thêm kích thước và giá tương ứng vào mảng hai chiều
+    $sizes[] = array($row['size']);
+  }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -76,7 +88,7 @@ $row = $result1->fetch_assoc()
                   <p class="line-price">
                     <span class="">Giá: </span>
                     <span class="ProductPrice" itemprop="price" content="220000">
-                    <span id="price"><?=$row['price']?></span>&#8363
+                    <span id="price"><?=$eachprice['price']?></span>&#8363
                     </span>/
 
                   </p>
@@ -84,21 +96,18 @@ $row = $result1->fetch_assoc()
                 </div>
 
                 <div class="product-select-swatch">
-                  <div class="product-select-swatch-text">
+                  <div class="product-select-swatch-text" id = "text-size">
                     <p>Kích Thước:</p>
                   </div>
                   <div class="select-swap">
                     <div class="data-one"style="display:flex;">
-                      <label for="swatch-19" class="size-btn"data-size="18" data-id = "<?=$id?>">
-                        18 cm
-                      </label>
-                      <label for="swatch-19" class="size-btn"data-size="22" data-id = "<?=$id?>">
-                        22 cm
-                      </label>
-                      <label for="swatch-19" class="size-btn"data-size="26" data-id = "<?=$id?>">
-                        26 cm
-                      </label>
-                      <input type="hidden" name="size-btn" id="save-size" value="" >
+                    <?php       
+                      foreach($sizes as $size) {
+                            $sizesp = $size[0];
+                            ?>
+                      <span class="size-btn" data-size="<?php echo $sizesp?>" data-id = "<?=$each['id']?>"><?php echo $sizesp?> cm</span>
+                      <?php }?>
+                      <input type="hidden" name="size-btn" id="save-size" value="<?=$eachprice['size']?>" >
                     </div>
                   </div>
                 </div>
@@ -359,6 +368,14 @@ $row = $result1->fetch_assoc()
   const priceSpan = document.getElementById("price");
   const saveSize = document.getElementById("save-size");
   let a = "";
+
+  const sizeText = document.getElementById("text-size")
+  sizeButtons[0].style.backgroundColor = "yellow";
+    const countsizeButtons = sizeButtons.length;
+    if(countsizeButtons === 1){
+        sizeButtons[0].style.display = "none";
+        sizeText.style.display = "none";
+    }
   const updatePrice = (size,id) => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `get_price.php?size=${size}&id=${id}`, true);

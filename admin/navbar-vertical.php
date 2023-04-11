@@ -39,7 +39,11 @@
                     </a>
                     <div class="sub-navbar">
                         <ul class="list-group">
-                            <li class="sub-navbar__item">
+                            <li class="sub-navbar__item" <?php
+                                if($_SESSION['level']==2){
+                                    ?>style ="display:none;"<?php
+                                }
+                            ?>>
                                 <a class="sub-navbar__link list-group-item-action text-decoration-none" href="../employees">Nhân viên</a>
                             </li>
                             <li class="sub-navbar__item">

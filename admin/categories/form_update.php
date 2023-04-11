@@ -1,5 +1,5 @@
 <?php 
-    require_once '../check_super_admin_signin.php';
+    require_once '../check_admin_signin.php';
     $page = 'categories';
     require_once '../navbar-vertical.php';
 
@@ -18,7 +18,7 @@
         <div class=" container-fluid px-4">
             <?php include '../error_success.php' ?>
           
-            <div class="row gx-5">
+            <div class="row gx-5"style = "padding-right:1000px;padding-left:50px;">
                 <div class="col-12 text-white">
                     <form action="process_update.php" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="<?= $each['id'] ?>">

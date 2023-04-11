@@ -52,7 +52,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
               <i class="bi bi-people-fill" aria-hidden="true"></i>
               Chào , <?= $eachUser['name'] ?>
             </a>
-            <a href="signout.php">
+            <a onclick="return confirm('Bạn chắc chắn muốn đăng xuất?')" href="signout.php">
               <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
               Đăng Xuất
             </a>
@@ -137,7 +137,7 @@ $cart = (isset($_SESSION['cart']))? $_SESSION['cart'] : [];
               Chào , <?= $eachUser['name'] ?>
             </a>
             <a class="item" href="signout.php">
-              <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+              <i onclick="return confirm('Bạn chắc chắn muốn đăng xuất?')" class="bi bi-box-arrow-right" aria-hidden="true"></i>
               Đăng Xuất
             </a>
           <?php } ?>

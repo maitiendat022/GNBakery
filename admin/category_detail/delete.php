@@ -1,5 +1,5 @@
 <?php 
-require_once '../check_super_admin_signin.php';
+require_once '../check_admin_signin.php';
 if(empty($_GET['id'])) {
     $_SESSION['error'] = 'Phải chọn để xóa';
     header('location:index.php');

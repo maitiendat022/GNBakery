@@ -31,10 +31,12 @@
     $num_page = ceil($num_product / $num_product_per_page);
     $skip_page = $num_product_per_page * ($page_current - 1);
 
-    $sql = "select products.*, category_detail.name as category_name, users.name as admin_name, products.user_id
+    $sql = "select products.*, category_detail.name as category_name, products.user_id, users.id as admin_id, users.level 
     from products
     join category_detail
     on category_detail.id = products.category_detail_id
+    join categories
+    on categories.id = category_detail.category_id
     join users
     on users.id = products.user_id
     where $where
@@ -98,21 +100,26 @@
                                                 Ngừng bán
                                             <?php } ?>
                                         </td>
-                                        <td><?= $each['admin_name'] ?></td>
+                                        <td><?php if($each['level'] == 1){
+                                                        echo "Quản trị viên";
+                                                    }else{ 
+                                                        $admin_id = $each['admin_id'];
+                                                        echo "NVGN$admin_id";
+                                                    }?></td>
                                         <?php if($each['status'] === '1') { ?>
                                             <td>
-                                                <a href="form_update.php?id=<?= $each['id'] ?>&admin_id=<?= $each['user_id'] ?>">
+                                                <a href="form_update.php?id=<?= $each['id'] ?>">
                                                     <i class="bi bi-pencil-fill"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="delete.php?id=<?= $each['id'] ?>&admin_id=<?= $each['user_id'] ?>">
+                                                <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="delete.php?id=<?= $each['id'] ?>">
                                                     <i class="bi bi-trash-fill"></i>
                                                 </a>
                                             </td>
                                         <?php } else { ?>
-                                            <td colspan="2">
-                                                <a href="update_status.php?id=<?= $each['id'] ?>&admin_id=<?= $each['user_id'] ?>">
+                                            <td colspan="2">    
+                                                <a href="update_status.php?id=<?= $each['id'] ?>">
                                                     Mở bán
                                                 </a>
                                             </td>

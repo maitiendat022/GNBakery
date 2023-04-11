@@ -1,6 +1,6 @@
 <?php
 
-require_once '../check_super_admin_signin.php';
+require_once '../check_admin_signin.php';
 if(empty($_POST['id'])) {
     $_SESSION['error'] = 'Không có dữ liệu để sửa!';
     header('location:index.php');

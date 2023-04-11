@@ -7,19 +7,24 @@ if(empty($_GET['id'])) {
     exit();
 }
   
-if($_GET['admin_id'] != $_SESSION['id'] || $_SESSION['level'] != 1) {
+if($_SESSION['level'] == 0) {
     $_SESSION['error'] = 'Bạn không có quyền để truy cập';
     header('location:index.php');
     exit();
 }
-
+if($_SESSION['level'] == 2) {
+    $_SESSION['error'] = 'Bạn không có quyền mở bán lại';
+    header('location:index.php');
+    exit();
+}
 $id = $_GET['id'];
-$admin_id = $_GET['admin_id'];
+$admin_id = $_SESSION['id'];
+
 require_once '../../database/connect.php';
 
 $sql = "update products
-set status = 1
-where id = '$id' and user_id = '$admin_id'";
+set status = 1, status_id = 0
+where id = '$id' ";
 
 mysqli_query($connect, $sql);
 

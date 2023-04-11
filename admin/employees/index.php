@@ -1,7 +1,7 @@
 <?php 
     require_once '../check_admin_signin.php';
     $page = 'users';
-
+    $admin_id = $_SESSION['id'];
     require_once '../../database/connect.php';
 
     $where = '1';
@@ -37,7 +37,8 @@
             </a>
         </div>
         <div class="container-fluid px-4">
-            <a href="form_insert.php" class="btn-insert btn btn-light btn-lg">Thêm</a>
+            
+            <a href="form_insert.php" class="btn-insert btn btn-light btn-lg">Thêm</a>   
             <div class="container-fluid">
             <div class="row gx-5">
                 <div class="col-12">
@@ -60,7 +61,7 @@
                             <?php foreach($result as $each){ ?>
                                 <tr>
                                     <th class ="id-numbers" scope="col">
-                                        <a style = "text-decoration:none; color:#333;"href="./detail.php?id=<?= $each['id'] ?>" >NVGN<?= $each['id'] ?></a>
+                                        <a style = "text-decoration:none; color:#333;"href="" >NVGN<?= $each['id'] ?></a>
                                     </th>
                                     <th scope="col">
                                         <span class = "nameofyou"><?= $each['name'] ?></span>
@@ -80,13 +81,17 @@
                                     <th scope="col" ><?=$each['birthday'] ?></th>
                                     <th scope="col" ><?= $each['date']?>
                                     <th scope="col">
+                                        
                                         <div class="two_buttons">
                                             <?php if( $each['status'] == 1) { ?>
-                                            <a href="./update.php?id=<?= $each['id'] ?>&status=1" class = "btnBrowser">Sửa</a>
-                                            <a href="./update.php?id=<?= $each['id'] ?>&status=2">Xóa</a>
-                                            <?php } ?>
+                                            <a href="./form_update.php?id=<?= $each['id'] ?>" style = "width:60px;"class = "btnBrowser">Sửa</a>
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="./update_status.php?id=<?= $each['id'] ?>&status=0&admin_id=<?=$admin_id ?>" style = "width:60px;">Xóa</a>
+                                         
                                         </div>
-                                     </th>
+                                        <?php }if($each['status'] == 0){
+                                            ?><a onclick="return confirm('Bạn chắc chắn muốn khôi phục lại tài khoản?')" href="./update_status.php?id=<?= $each['id'] ?>&status=1&admin_id=<?=$admin_id ?>">Khôi phục</a>
+                                        <?php } ?> 
+                                    </th>
                                 </tr>
                             <?php } ?>
                             </tbody>

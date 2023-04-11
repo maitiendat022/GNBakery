@@ -14,14 +14,22 @@
       $search = htmlspecialchars($_POST['search'], ENT_QUOTES);
       $where = "products.name like '%$search%'";
   }
+  $sql = "SELECT size FROM your_table_name WHERE product_id LIMIT 1";
 
-  $sql = "SELECT products.*, category_detail.name as category_name , price FROM products
-  join category_detail on category_detail.id = products.category_detail_id
-  join products_size on products.id = products_size.product_id
-  where $where and products_size.size = 18
-  order by category_detail_id ASC, products.id desc";
+  $sql = "SELECT products.*, category_detail.name as category_name, products_size.price, products_size.size
+  FROM products
+  INNER JOIN (
+    SELECT product_id, MIN(price) as price
+    FROM products_size
+    GROUP BY product_id
+  ) as min_price ON products.id = min_price.product_id
+  INNER JOIN products_size ON products.id = products_size.product_id AND min_price.price = products_size.price
+  INNER JOIN category_detail ON category_detail.id = products.category_detail_id
+  WHERE $where and products.status = 1
+  ORDER BY category_detail.id ASC, products.id DESC";
 
   $result = mysqli_query($connect, $sql);
+  
   if(mysqli_num_rows($result) == 0) {
     $error = 'Không có sản phẩm nào';
   }
@@ -114,10 +122,11 @@
               <div class="product-price-action">
                 <p class="product-price"><?= number_format($each['price'], 0, '.', ',') ?></p>
                 <div class="product-action">
-                  <form action="view_cart.php?id=<?= $each['id'] ?>" method="POST">
-                  <button   type="submit" name="addcart" class="btn-action"><i class="bi bi-cart-fill"></i>
-                  </button>
-      </form>
+              <form action="view_cart.php" method="GET">
+                <input type="hidden" name="id" value="<?php echo $each['id'] ?>" >
+                <input type="hidden" name="size-btn" id="save-size" value="<?=$each['size']?>" >
+                <button   type="submit" name="addcart" class="btn-action"><i class="bi bi-cart-fill"></i></button>
+              </form>
                 </div>
               </div>
             </div>
