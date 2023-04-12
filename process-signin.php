@@ -13,6 +13,7 @@
             $pass_hash = $row['password'];
             if(password_verify($pass,$pass_hash)){
                 $_SESSION['id'] = $id;
+                $_SESSION['success'] = 'Đăng nhập thành công';
                 header("location:index.php");
             }else{
                 $error = "Tài khoản hoặc mật khẩu chưa chính xác ";
@@ -24,6 +25,7 @@
             header("location:signin.php?error=$error");
         }
     }else{
+        
         header("location: signin.php");
     }
     

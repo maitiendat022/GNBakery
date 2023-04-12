@@ -138,7 +138,7 @@
               <span class="cartt__subtotal"><?php echo number_format(total_price($cart)) ?>&#8363</span>
             </p>
 
-              <a class="btn-payment-text" href="./test.php">
+              <a class="btn-payment-text" href="./confirminfo.php">
                 Đặt hàng
               </a>
 

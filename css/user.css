@@ -27,13 +27,12 @@
 	.content-grid{
 		border-radius: 10px;
 		box-shadow: 1px 1px 2px 0px #00000040;
-	 padding: 15px;
-    background-color: white;
+	 	padding: 15px;
+    	background-color: white;
 		margin-top: 15px;
 		display: flex;
 		width: 100%;
-		flex-wrap: wrap;
-		justify-content: space-between;
+		
 	}
 	.content-grid-left{
      width: 50%;
@@ -50,8 +49,8 @@
 		font-weight: 100;
 	}
 	.content-grid-right{
-		margin-left: 10px;
-		width: 43%;
+		margin-left: 30px;
+		
 	}
 
 

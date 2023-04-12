@@ -10,7 +10,7 @@
   $result = mysqli_query($connect,$sql);
   $each = mysqli_fetch_array($result);
 
-  $sqlOrder = "select id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, status, total_price from orders where user_id = '$id'";
+  $sqlOrder = "select id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, status,id_status, total_price from orders where user_id = '$id'";
   $resultOrder = mysqli_query($connect,$sqlOrder);
 ?>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-   <link rel="stylesheet" type="text/css" href="css/user.css">
+  <link rel="stylesheet" type="text/css" href="css/user.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
  
@@ -47,7 +47,7 @@
    </div>
 
    <div class="content-grid">
-     <div class="content-grid-left">
+     <div class="content-grid-left"style = "width:70%;">
         <h2 class="h4">Lịch Sử Giao Dịch</h2>
         <p <?php
             if(mysqli_num_rows($resultOrder)<1){
@@ -70,7 +70,8 @@
               <th scope="col" class="time-shopping">Thời gian đặt</th>
               <th scope="col" class="total-shopping">Tổng tiền</th>
               <th scope="col" class="stt-shopping">Trạng thái</th>
-              <th scope="col" class="sttt-shopping" >Xem chi tiết</th>
+              <th scope="col" class="sttt-shopping" >Chi tiết</th>
+              <th scope="col" class="sttt-shopping" >Thao tác</th>
             </tr>
           </thead>
           <tbody>
@@ -97,7 +98,22 @@
                                         }
                                         ?></td>
    
-              <td class="sttt-shopping"><a class="detail-txt" href="order_product.php?order_id=<?php echo $rowOrder['id'] ?>&status=<?= $rowOrder['status'] ?>">Chi tiết</a></td>
+              <td style = "padding-left:20px;"class="sttt-shopping"><a class="detail-txt" href="order_product.php?order_id=<?php echo $rowOrder['id'] ?>&status=<?= $rowOrder['status'] ?>"><i class="fa-regular fa-eye"></i></a></td>
+              <?php if($rowOrder['status']==0){?>
+                <td class="sttt-shopping"><a class="detail-txt" href="update_status_oder.php?order_id=<?php echo $rowOrder['id'] ?>">Hủy đơn</a></td>
+              <?php }if($rowOrder['status']==1){?>
+                <td>Quản trị viên đã duyệt</td>
+              <?php }if($rowOrder['status']==2){
+                        $user_id = $rowOrder['id_status'];
+                        $sql = "SELECT level FROM users WHERE id = $user_id";
+                        $result = mysqli_query($connect, $sql);
+                        $each = mysqli_fetch_array($result);
+                        if($each['level']==0){?>
+                          <td>Bạn đã hủy đơn</td>
+                  <?php }else{ ?>
+                          <td>Quản trị viên đã hủy</td>
+                      <?php }
+                    }?>
             </tr>
             <?php
                 }

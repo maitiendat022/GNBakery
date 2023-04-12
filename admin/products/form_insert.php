@@ -21,7 +21,7 @@
         <div class=" container-fluid px-4">
             <?php include '../error_success.php' ?>
         
-            <div class="row gx-5"style = "padding-right:1000px;padding-left:50px;">
+            <div class="row gx-5"style = "padding-right:500px;padding-left:50px;">
                 <div class="col-12">
 
                     <form action="process_insert.php" method="post" enctype="multipart/form-data">

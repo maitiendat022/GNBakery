@@ -38,13 +38,11 @@ if($stmt) {
     mysqli_stmt_execute($stmt);
 
     $_SESSION['success'] = 'Đã thêm thành công';
-    
-    header('location:form_insert.php');
-    exit();
+    die($_SESSION['success']);
 }
 else {
     $_SESSION['error'] = 'Không thể chuẩn bị truy vấn!';
-    
+    die($_SESSION['error']);
     header('location:form_insert.php');
     exit();
 }

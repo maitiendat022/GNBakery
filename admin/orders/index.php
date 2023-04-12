@@ -30,7 +30,6 @@
     <div class="main-container-text d-flex align-items-center">
         <a class="header__name text-decoration-none" href="#">
             Đơn Hàng
-            <span><?= $idUser?></span>
         </a>
     </div>
 
@@ -96,10 +95,13 @@
                                             ?><span>Quản trị viên đã hủy đơn</span>
                                             <?php
                                             }if($each['status'] == 1 && $level == 2){
-                                            ?><span>Nhân viên <a class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã duyệt đơn</span>
+                                            ?><span>Nhân viên <a  href="../employees/form_update.php?id=<?=$each['id_status']?>" class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã duyệt đơn</span>
                                             <?php
                                             }if($each['status'] == 2 && $level == 2){
-                                            ?><span>Nhân viên <a class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã hủy đơn</span>
+                                                ?><span>Nhân viên <a href="../employees/form_update.php?id=<?=$each['id_status']?>" class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã hủy đơn</span>
+                                                <?php
+                                            }if($each['status'] == 2 && $level == 0){
+                                            ?><span>Khách hàng đã hủy đơn</span>
                                             <?php
                                             }
                                             if($each['status'] == 0) { ?>

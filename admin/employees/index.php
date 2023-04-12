@@ -61,7 +61,7 @@
                             <?php foreach($result as $each){ ?>
                                 <tr>
                                     <th class ="id-numbers" scope="col">
-                                        <a style = "text-decoration:none; color:#333;"href="" >NVGN<?= $each['id'] ?></a>
+                                        <a href="../employees/form_update.php?id=<?=$each['id']?>"style = "text-decoration:none; color:#333;"href="" >NVGN<?= $each['id'] ?></a>
                                     </th>
                                     <th scope="col">
                                         <span class = "nameofyou"><?= $each['name'] ?></span>
