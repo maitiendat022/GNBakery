@@ -561,7 +561,10 @@ input[type=number] {
     margin: 0;
     font-weight: bolder;
 }
+.price{
+    font-weight: bolder;
 
+}
 .product-content-right-name p {
     margin-top: 4px;
     font-size: 1.6rem;
@@ -576,11 +579,11 @@ input[type=number] {
 }
 
 .line-price {
-    font-size: 1.6rem;
+    font-size: 2.1rem;
 }
 
-.ProductPrice {
-    font-weight: bolder;
+.product-price {
+    margin-bottom: 20px;
 }
 
 .product-select-swatch{
@@ -665,9 +668,19 @@ vertical-align: middle; }
     white-space:nowrap;
     vertical-align:top;
 }
+.size-btn{
+    margin-top: 10px;
+    padding: 5px;
+    font-size: 1.5rem;
+    border: 1px solid rgb(184, 179, 179);
+    border-radius: 1rem ;
+    margin-left: 2px;
+    background-color: #ffffff;
+}
 
 .product-actions {
-    margin-top: 15px;
+    margin-top: 40px;
+    
 }
 
 .product-actions #AddToCart,
@@ -683,7 +696,7 @@ vertical-align: middle; }
 
 .product-actions #AddToCart:hover,
 .product-actions #buy-now:hover {
-    background: #c0c906; 
+    background: #e6eb7b; 
 }
 
 /*tab*/

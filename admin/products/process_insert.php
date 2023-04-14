@@ -11,7 +11,8 @@ if(empty($_POST['name']) || empty($_POST['price']) || empty($_POST['size']) || e
 $sizes = $_POST['size'];
 $prices = $_POST['price'];
 
-$name = $_POST['name'];
+$name_input = $_POST['name'];
+$name = strtoupper($name_input);
 $image = $_FILES['image'];
 $description = $_POST['description'];
 $category = $_POST['category'];

@@ -9,15 +9,19 @@ if(empty($_GET['id'])) {
 $id = $_GET['id'];
 
 require_once '../../database/connect.php';
-$sql = "delete from category_detail where id = '$id'";
 
-mysqli_query($connect, $sql);
-$error = mysqli_error($connect);
-mysqli_close($connect);
-
-if(empty($error)) {
-    $_SESSION['success'] = 'Đã xóa thành công';
-} else {
+$sql = "select * from products where category_detail_id = '$id'";
+$result = mysqli_query($connect, $sql);
+if (mysqli_num_rows($result) > 0) {
     $_SESSION['error'] = 'Loại bánh này vẫn còn sản phẩm. Không thể xóa!';
+} else {
+    $sql = "delete from category_detail where id = '$id'";
+    mysqli_query($connect, $sql);
+    $_SESSION['success'] = 'Đã xóa thành công';
 }
+
 header('location:index.php');
+
+
+
+

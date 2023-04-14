@@ -25,7 +25,6 @@
             header("location:signin.php?error=$error");
         }
     }else{
-        
         header("location: signin.php");
     }
     

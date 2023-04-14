@@ -42,47 +42,28 @@
         <div class="page_container">
                 <div class="main_content">
                         
-                            <h2>Thông tin</h2>
-                            Email:<span name = "email"> <?php echo $row['email'] ?></span>
-                            <input type="text" name="id" style="display:none;" value = "<?php echo $row['id']?>">
+                            <h2 style ="margin-bottom:20px;">Thông tin</h2>
                             
+                            <input type="text" name="id" style="display:none;" value = "<?php echo $row['id']?>">
+                            <title>Form đổi mật khẩu</title>
+                            <button  style="margin-left: auto;padding:5px;border:1px solid #adb5bd;" type ="button"onclick="showPasswordForm()">Đổi mật khẩu</button><br>
+                            
+                            <div class="form_name">
+                                <label for="">Email</label>
+                                <input type="text" name = "email" class="form-control" placeholder = "Nhập họ tên" value ="<?php echo $row['email'] ?>" readonly>
+                              </div>
                             <div class="form_name">
                                 <label for="">Họ và tên</label>
                                 <input type="text" name = "name" class="form-control" placeholder = "Nhập họ tên" value ="<?php echo $row['name']?>" required>
                               </div>
-                            <div class="form_name">
-                                <label for="">Password</label>
-                                <input type="password" name = "password" class="form-control" placeholder="Nhập mật khẩu mới">
-                                <small style="color:red;">
-                                    <?php
-                                        if(isset($_GET['errorpass'])){
-                                            echo "{$_GET['errorpass']}";
-                                        }else{
-                                            echo "";
-                                        }
-                                    ?>
-                    	        </small>
-                              </div>
                             <div class="form_address">
                                 <label for="">Địa chỉ</label>
-                                <input type="" name = "address" class="form-control" placeholder="Thêm địa chỉ" value = "<?php
-                                                                                                                if($row['address']==NULL){
-                                                                                                                    echo "";
-                                                                                                                }else{
-                                                                                                                    echo $row['address'];
-                                                                                                                }
-                                                                                                            ?>">
+                                <input type="" name = "address" class="form-control" placeholder="Thêm địa chỉ" value = "<?php echo$row['address'] ?? ''?>">
                               </div>
                             <div class="form_phone">
                                   <label for="">Số điện thoại</label>
-                                <input type="" name = "phone" class="form-control" placeholder="Thêm số điện thoại" value = "<?php
-                                                                                                                if($row['phone']==NULL){
-                                                                                                                    echo "";
-                                                                                                                }else{
-                                                                                                                    echo $row['phone'];
-                                                                                                                }
-                                                                                                            ?>">
-                              </div>
+                                <input type="" name = "phone" class="form-control" placeholder="Thêm số điện thoại" value = "<?php echo$row['phone'] ?? ''?>">
+                              </div>                                                                                   
                             <div class="btnup">
                                 <button class="btnUpdate" name="btnUpdate" type="submit">Cập nhật</button>
                                 <a class="btnUpdatet" style="color:#FF1493; text-decoration:none; padding-left: 35px; padding-top: 7px;" href="user.php">Quay lại</a>
@@ -244,7 +225,56 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-
+  <script>
+    $('document').ready( function() {
+      $.notify("<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>", "success");
+    } );
+  </script>
   <script src="js/app.js"></script>
+  <script>
+		function showPasswordForm() {
+			document.getElementById("overlay").style.display = "block";
+			document.getElementById("password-form").style.display = "block";
+		}
+
+		function hidePasswordForm() {
+			document.getElementById("overlay").style.display = "none";
+			document.getElementById("password-form").style.display = "none";
+		}
+	</script>
 </body>
+	<div id="overlay" class="overlay" <?php if(isset( $_GET['error'])){
+                                              echo 'style = "display: block;"';
+                                          }else{
+                                            echo 'style = "display: none;"';
+                                          }?>onclick="hidePasswordForm()"></div>
+	<div <?php if(isset( $_GET['error'])){
+                                              echo 'style = "display: block;"';
+                                          }else{
+                                            echo 'style = "display: none;"';
+                                          }
+                                          ?>id="password-form" class="form-container">
+		<div>
+      <h3 style="margin-bottom:50px;margin-left:115px;color:#FF1493;">Đổi mật khẩu</h3> 
+      <span style="padding:10px;color:red;font-size:35px;" class="close-button" onclick="hidePasswordForm()">&times;</span>
+    </div>
+		<form action="change_password.php" method="post">
+      <small style = "color:red;"><?php echo $_GET['error'] ?? ''?></small>
+			<div style="display: flex; align-items: center;margin-top:20px">
+        <label for="old-password">Mật khẩu cũ:</label>
+			  <input style="margin-left: auto;" type="password" id="old-password" name="old-password">
+      </div>
+      <div  style="display: flex;align-items: center; margin-top:20px">
+			  <label for="new-password">Mật khẩu mới:</label>
+			  <input style="margin-left: auto;" type="password" id="new-password" name="new-password"><br>
+      </div>
+			<div  style="display: flex;align-items: center;margin-top:20px;margin-bottom:20px;">
+        <label style="margin-right: 10px;" for="confirm-password">Xác nhận mật khẩu mới:</label>
+			  <input style="margin-left: auto;" type="password" id="confirm-password" name="confirm-password"><br>
+      </div>
+			<div style="display: flex;">
+        <button style="margin-left: auto;padding:8px;" type="submit" >Xác nhận</button>
+      </div>
+		</form>
+	</div>
 </html>

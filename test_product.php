@@ -51,6 +51,7 @@ if(mysqli_num_rows($result) > 0) {
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script src="js/app.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -58,7 +59,7 @@ if(mysqli_num_rows($result) > 0) {
 
 <body>
 
-<?php require './header.php'; ?>
+  <?php require './header.php'; ?>
   <!--product-->
 
   <div class="hero-image">
@@ -131,7 +132,6 @@ if(mysqli_num_rows($result) > 0) {
    </div>
   </div>
   </form>
-
   <div class="product-tab">
     <div class="tab">
       <button class="tablinkss">Mô tả chung</button>
@@ -140,10 +140,62 @@ if(mysqli_num_rows($result) > 0) {
       <div id="Content" class="tablinks">
         <?= nl2br($each['description']) ?>
       </div>
-
-
-  
     </div>
+  </div>
+  <div style = "margin-left:100px">
+    <h1>Đánh giá sản phẩm</h1>
+    <form method="post" action="process_ratings.php">
+    
+      <input type="text" value = "<?= $_SESSION['id']?> " name ="user_id">
+
+      <label for="product_id">Mã sản phẩm:</label>
+      <input readonly value = "<?= $each['id']?>"type="text" id="product_id" name="product_id" ><br>
+
+      <label for="rating">Đánh giá:</label>
+      <div class="rating">
+        <input type="radio" id="star5" name="rating" value="5">
+        <label for="star5"><i class="fas fa-star"></i></label>
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4"><i class="fas fa-star"></i></label>
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3"><i class="fas fa-star"></i></label>
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2"><i class="fas fa-star"></i></label>
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1"><i class="fas fa-star"></i></label>
+      </div><br>
+
+      <label for="comment">Nhận xét:</label>
+      <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br>
+
+      <input type="submit" value="Đánh giá">
+    </form>
+
+    <?php
+      $product_id = $each['id']; // ID của sản phẩm cần hiển thị đánh giá
+      $sql = "SELECT ratings.star, ratings.comment, users.name FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.product_id = '$product_id'";
+      $result = $connect->query($sql);
+    ?>
+    <?php while($row = $result->fetch_assoc()): ?>
+        <div class = "rated"class="rating">
+            <span class="user"><?php echo $row['name']; ?></span>
+            <span class="star-rating">
+          <?php
+            $star = $row['star'];
+            for ($i = 1; $i <= 5; $i++) {
+                if ($i <= $star) {
+                    echo '<i class="fas fa-star"></i>'; 
+                } else {
+                    echo '<i class="far fa-star"></i>'; 
+                }
+            }
+          ?>
+            </span>
+             <span class="comment"><?php echo $row['comment']; ?></span>
+            
+        </div>
+    <?php endwhile; ?>
+
   </div>
 
   <div id="Home-notice">
@@ -403,6 +455,13 @@ if(mysqli_num_rows($result) > 0) {
     });
   });
 </script>
+<script>
+    // Xử lý sự kiện khi người dùng chọn số sao
+    $(".rating input:radio").change(function() {
+      $(this).closest(".rating").find("label").removeClass("selected");
+      $(this).closest("label").addClass("selected");
+    });
+  </script>
 </body>
 
 </html>

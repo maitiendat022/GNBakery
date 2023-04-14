@@ -101,14 +101,13 @@ small{
 }
 .cart__subtotal-title{
     color: #FF1493;
-    
     margin:15px;
     font-size: 23px;
 }
 .cart__subtotal{
     padding-top: 10px;
-    margin-left: 30px;
-    font-size: 18px;
+    font-size: 25px;
+    font-weight: bold;
 }
 footer{
     margin-top: 100px;

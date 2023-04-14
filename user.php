@@ -7,8 +7,8 @@
 
   $id = $_SESSION['id'];
   $sql = "select * from users where id = '$id'";
-  $result = mysqli_query($connect,$sql);
-  $each = mysqli_fetch_array($result);
+  $resultUser = mysqli_query($connect,$sql);
+  $eachUser = mysqli_fetch_array($resultUser);
 
   $sqlOrder = "select id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, status,id_status, total_price from orders where user_id = '$id'";
   $resultOrder = mysqli_query($connect,$sqlOrder);
@@ -71,7 +71,7 @@
               <th scope="col" class="total-shopping">Tổng tiền</th>
               <th scope="col" class="stt-shopping">Trạng thái</th>
               <th scope="col" class="sttt-shopping" >Chi tiết</th>
-              <th scope="col" class="sttt-shopping" >Thao tác</th>
+              <th scope="col" class="sttt-shopping" >Quản lý</th>
             </tr>
           </thead>
           <tbody>
@@ -100,9 +100,9 @@
    
               <td style = "padding-left:20px;"class="sttt-shopping"><a class="detail-txt" href="order_product.php?order_id=<?php echo $rowOrder['id'] ?>&status=<?= $rowOrder['status'] ?>"><i class="fa-regular fa-eye"></i></a></td>
               <?php if($rowOrder['status']==0){?>
-                <td class="sttt-shopping"><a class="detail-txt" href="update_status_oder.php?order_id=<?php echo $rowOrder['id'] ?>">Hủy đơn</a></td>
+                <td class="sttt-shopping"><a class="detail-txt"onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')" href="update_status_oder.php?order_id=<?php echo $rowOrder['id'] ?>">Hủy đơn</a></td>
               <?php }if($rowOrder['status']==1){?>
-                <td>Quản trị viên đã duyệt</td>
+                <td>Đơn hàng đã được duyệt</td>
               <?php }if($rowOrder['status']==2){
                         $user_id = $rowOrder['id_status'];
                         $sql = "SELECT level FROM users WHERE id = $user_id";
@@ -111,7 +111,7 @@
                         if($each['level']==0){?>
                           <td>Bạn đã hủy đơn</td>
                   <?php }else{ ?>
-                          <td>Quản trị viên đã hủy</td>
+                          <td>Đơn hàng đã bị hủy</td>
                       <?php }
                     }?>
             </tr>
@@ -124,12 +124,12 @@
      </div>
      <div class="content-grid-right">
        <h4 class="h4">Thông Tin Tài Khoản</h4>
-       <h3 class="h4">Họ và tên: <?= $each['name'] ?? '' ?></h3>
+       <h3 class="h4">Họ và tên: <?= $eachUser['name'] ?? ''?></h3>
        <p>
         <br>
-        Số điện thoại: <?= $each['phone'] ?? '' ?>
+        Số điện thoại: <?= $eachUser['phone'] ?? '' ?>
         <br>
-        Địa chỉ: <?= $each['address'] ?? '' ?>
+        Địa chỉ: <?= $eachUser['address'] ?? '' ?>
 
        </p>
        <p class="text-address"><a href="update.php">Sửa thông tin</a></p>

@@ -14,7 +14,8 @@ $prices = $_POST['price'];
 $image_old = $_POST['image_old'];
 $image_new = $_FILES['image_new'];
 
-$name = $_POST['name'];
+$name_input = $_POST['name'];
+$name = strtoupper($name_input);
 $description = $_POST['description'];
 $category = $_POST['category'];
 $admin_id = $_SESSION['id'];

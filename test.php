@@ -63,27 +63,43 @@ $each = mysqli_fetch_array($result);
             <label for="">Số điện thoại</label>
             <input type="" name="phone_receiver" class="form-control" value="<?= $each['phone'] ?>" required>
           </div>
-          <div class="form_phone">
-            <label for="">Quận/Huyện:</label>
-            <select class="form-control" id="district" name="district" required>
-              <option value="">-- Chọn quận/huyện --</option>
-              <option value="Ba Đình">Ba Đình</option>
-              <option value="Hoàn Kiếm">Hoàn Kiếm</option>
-              <option value="Cầu Giấy">Cầu Giấy</option>
-            </select>
-          </div>
-          <div class="form_phone">
-            <label for="">Phường/Xã:</label>
-            <select class="form-control" id="ward" name="ward" required>
-              <option value="">-- Chọn phường/xã --</option>
-            <!-- Danh sách các phường/xã thuộc các quận/huyện đã chọn sẽ được thêm bằng JavaScript -->
-            </select>
-          </div>
-          <div class="form_phone">
-            <label for="street">Đường:</label>
-            <input class="form-control" id="street" name="street" type="text" required>
-          </div>
+          
+  <label for="name">Họ tên:</label>
+  <input type="text" id="name" name="name"><br>
 
+  <label for="phone">Số điện thoại:</label>
+  <input type="text" id="phone" name="phone"><br>
+
+  <label for="email">Email:</label>
+  <input type="text" id="email" name="email"><br>
+
+  <label for="address">Địa chỉ:</label><br>
+
+  <label for="province">Tỉnh/Thành phố:</label>
+  <input type="text" id="province" name="province" value="Hà Nội" readonly><br>
+
+  <label for="district">Quận/Huyện:</label>
+  <select id="district" name="district">
+    <option value="">--Chọn Quận/Huyện--</option>
+    <option value="Ba Đình">Ba Đình</option>
+    <option value="Hoàn Kiếm">Hoàn Kiếm</option>
+    <option value="Hai Bà Trưng">Hai Bà Trưng</option>
+    <option value="Đống Đa">Đống Đa</option>
+    <option value="Tây Hồ">Tây Hồ</option>
+    <!-- Danh sách các quận/huyện khác trong nội thành Hà Nội -->
+  </select><br>
+
+  <label for="ward">Phường/Xã:</label>
+  <select id="ward" name="ward">
+    <option value="">--Chọn Phường/Xã--</option>
+    <!-- Danh sách các phường/xã trong quận/huyện đã chọn -->
+  </select><br>
+
+  <label for="street">Đường/Phố:</label>
+  <input type="text" id="street" name="street"><br>
+
+  <button type="submit">Đặt hàng</button>
+</form>
           <div class="btnup">
             <a class="btnReturn" href="./cart.php">Quay lại</a>
             <button class="btnConfirm">Xác nhận</button>
@@ -112,52 +128,41 @@ $each = mysqli_fetch_array($result);
   <script src="js/app.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script>
-  const wardData = {
-    'Ba Đình': [
-      { name: 'Ngọc Hà', value: 'ngochaba' },
-      { name: 'Điện Biên', value: 'dienbien' },
-      { name: 'Kim Mã', value: 'kimma' },
-      <!-- Danh sách các phường/xã thuộc Ba Đình -->
-    ],
-    'Hoàn Kiếm': [
-      { name: 'Phúc Tân', value: 'phuctan' },
-      { name: 'Hàng Mã', value: 'hangma' },
-      { name: 'Hàng Buồm', value: 'hangbuom' },
-      <!-- Danh sách các phường/xã thuộc Hoàn Kiếm -->
-    ],
-    'Cầu Giấy': [
-      { name: 'Nghĩa Đô', value: 'nghiado' },
-      { name: 'Quan Hoa', value: 'quanhoa' },
-      { name: 'Dịch Vọng', value: 'dichvong' },
-      <!-- Danh sách các phường/xã thuộc Cầu Giấy -->
-    ]
-    <!-- Thêm danh sách các phường/xã của các quận/huyện khác của Hà Nội nếu cần -->
-  };
 
-  const districtSelect = document.getElementById('district');
-  const wardSelect = document.getElementById('ward');
-  const streetInput = document.getElementById('street');
 
-  districtSelect.addEventListener('change', () => {
-    const selectedDistrict = districtSelect.value;
-    wardSelect.innerHTML = '<option value="">-- Chọn phường/xã --</option>';
-    if (selectedDistrict) {
-      const wards = wardData[selectedDistrict];
-      wards.forEach((ward) => {
-        const option = document.createElement('option');
-        option.value = ward.value;
-        option.textContent = ward.name;
-        wardSelect.appendChild(option);
+<!-- Đoạn mã JavaScript để hiển thị danh sách phường/xã theo quận/huyện -->
+<script>
+  $(document).ready(function() {
+    // Lấy danh sách các quận/huyện từ một nguồn dữ liệu nào đó
+    var districts = [
+      { name: "Ba Đình", wards: ["Phúc Xá", "Ngọc Hà", "Điện Biên", "Vĩnh Phúc", "Cống Vị"] },
+      { name: "Hoàn Kiếm", wards: ["Tràng Tiền", "Trần Hưng Đạo", "Hàng Bài", "Phan Chu Trinh"] },
+      { name: "Hai Bà Trưng", wards: ["Phố Huế", "Đống Mác", "Bạch Đằng", "Bách Khoa", "Trương Định"] },
+      { name: "Đống Đa", wards: ["Cát Linh", "Văn Miếu", "Láng Hạ", "Khâm Thiên", "Thái Hà"] },
+      { name: "Tây Hồ", wards: ["Quảng An", "Xuân La", "Tứ Liên", "Bưởi", "Nhật Tân"] }
+      // Danh sách các quận/huyện khác
+    ];
+
+    // Lấy các trường select quận/huyện và phường/xã
+    var districtSelect = $('#district');
+    var wardSelect = $('#ward');
+
+    // Khi người dùng chọn quận/huyện
+    districtSelect.change(function() {
+      // Xóa danh sách phường/xã cũ
+      wardSelect.empty();
+      // Lấy danh sách phường/xã theo quận/huyện đã chọn
+      var selectedDistrict = districtSelect.val();
+      var selectedWards = districts.find(function(district) {
+        return district.name === selectedDistrict;
+      }).wards;
+      // Thêm danh sách phường/xã vào trường select phường/xã
+      $.each(selectedWards, function(index, ward) {
+        wardSelect.append($('<option></option>').attr('value', ward).text(ward));
       });
-      wardSelect.disabled = false;
-    } else {
-      wardSelect.disabled = true;
-    }
-    streetInput.value = '';
+    });
   });
 </script>
-
 
 
 

@@ -4,8 +4,15 @@ $search = $_GET['term'];
 
 require_once './database/connect.php';
 
-$sql = "select products.name,products.id,products.image,products_size.price 
-from products,products_size where name like '%$search%' and products_size.size = 18";
+$sql = "SELECT p.name, p.id, p.image, ps.price, ps.size
+FROM products p
+INNER JOIN (
+  SELECT product_id, MIN(price) AS price
+  FROM products_size
+  GROUP BY product_id
+) min_price ON p.id = min_price.product_id
+INNER JOIN products_size ps ON min_price.product_id = ps.product_id AND min_price.price = ps.price
+WHERE p.name LIKE '%$search%' AND p.status = 1";
 $result = mysqli_query($connect,$sql);
 
 $arr = [];

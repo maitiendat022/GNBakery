@@ -49,17 +49,18 @@
                     <div class="product-price">
                         <p class="line-price">
                             <span class="">Giá: </span>
-                            <span id="price"><?=$eachprice['price']?></span> &#8363
-                        </p>
+                            <span class="price" id="price"><?=$eachprice['price']?> </span>&#8363
                     </div>
-                <div>
-                    <?php       
-                    foreach($sizes as $size) {
+                    <span style ="font-size:1.6rem;display:none;"id="size-text">Kích thước: </span> 
+                    <div>
+                       
+                        <?php       
+                        foreach($sizes as $size) {
                             $sizesp = $size[0];
                             ?>
-                    <span class="size-btn" data-size="<?php echo $sizesp?>" data-id = "<?=$each['id']?>"><?php echo $sizesp?> cm</span>
-                    <?php }?>
-                </div>
+                        <button type="button" class="size-btn" data-size="<?php echo $sizesp?>" data-id = "<?=$each['id']?>"><?php echo $sizesp?> cm</button>
+                        <?php }?>
+                    </div>
                 </div>
                 
                 <div class="product-actions">
@@ -79,7 +80,7 @@
             <?= nl2br($each['description']) ?>
         </div>
     </div>
-
+    
 
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -102,12 +103,16 @@
 </script>
 <script>
     const sizeButtons = document.querySelectorAll(".size-btn");
+    const sizeText = document.getElementById("size-text");
     const priceSpan = document.getElementById("price");
     
-    sizeButtons[0].style.backgroundColor = "yellow";
+    sizeButtons[0].style.backgroundColor = "var(--navbar-color)";
     const countsizeButtons = sizeButtons.length;
     if(countsizeButtons === 1){
         sizeButtons[0].style.display = "none";
+        
+    }else{
+        sizeText.style.display = "block";
     }
 
     const updatePrice = (size,id) => {
@@ -129,9 +134,12 @@
         const selectedSize = event.target.dataset.size;
         const selectedId = event.target.dataset.id;
         sizeButtons.forEach((button) => {
-        button.style.backgroundColor = ""; // Xóa màu nền của tất cả các thẻ kích thước
+        button.style.backgroundColor = "";
+        // Xóa màu nền của tất cả các thẻ kích thước
     });
-        event.target.style.backgroundColor = "yellow"; // Thay đổi màu nền của thẻ kích thước được chọn
+        event.target.style.backgroundColor = "var(--navbar-color)"; // Thay đổi màu nền của thẻ kích thước được chọn
+       
+
         updatePrice(selectedSize, selectedId);
     });
   });

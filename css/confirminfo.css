@@ -26,6 +26,7 @@ body, html {
  /* MAIN */
  .main-container-header{
      width: 100%;
+     margin-bottom: 50px;
  }
  .confirm-box{
      margin: 50px 160px 10px 160px;
@@ -48,8 +49,6 @@ body, html {
 }
 .page_container{
     justify-content: center;
-    height: 410px;
- 
     margin-left: 100px;
 }
 .main-container{
@@ -60,15 +59,32 @@ body, html {
     font-family: Roboto;
     font-size: 16px;
 }
-.form_address{
-    margin-top: 38px;
+.form_phone{
+    margin-top: 30px;
     font-family: Roboto;
     font-size: 16px;
 }
-.form_phone{
-    margin-top: 41px;
+.form_address{
+    margin-top: 30px;
     font-family: Roboto;
     font-size: 16px;
+    display: flex;
+    
+}
+.form_pttt{
+    margin-top: 10px;
+    font-family: Roboto;
+    font-size: 16px;
+   
+}
+
+.address{
+    padding-left: 50px;
+    margin-top: 20px;
+    font-size: 16px;
+}
+.radio_pttt :checked{
+    color: #FF1493;
 }
 .btnReturn{
     background-color: white;
@@ -108,6 +124,7 @@ body, html {
 .btnConfirm:hover{
     color: #FFBFBF;
 }
+
 @media only screen and (max-width: 700px){
     .confirm-box{
         width: 100%;

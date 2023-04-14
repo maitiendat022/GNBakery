@@ -1,6 +1,6 @@
 <?php
 
-$connect = mysqli_connect('localhost', 'root', '', 'GNbakery-t');
+$connect = mysqli_connect('localhost', 'root', '', 'GNbakery');
 mysqli_set_charset($connect, 'utf8');
 if(!$connect) {
     die("Kết nối thất bại. Vui lòng kiểm tra lại các thông tin máy chủ");

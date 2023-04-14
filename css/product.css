@@ -106,13 +106,17 @@ body, html {
 }
 .data-one{
     
-    -webkit-font-smoothing: antialiased;
-    
-    display: inline-block;
     position: relative;
-   
-
     margin-left: 20px;
+}
+.data-one button{ 
+    margin-top: 10px;
+    padding: 5px;
+    font-size: 1rem;
+    border: 1px solid rgb(184, 179, 179);
+    border-radius: 0.7rem ;
+    margin-left: 5px;
+    background-color: #ffffff;
 }
 .input-opt {
     display: none;
@@ -339,7 +343,13 @@ ul.productss li:hover img{
 }
 .product-price .line-price span{
     margin-right: 10px;
-    font-size: 17px;
+    font-size: 20px;
+}
+.product-price .line-price .ProductPrice{
+    font-size: 25px;
+}
+.product-price .line-price .ProductPrice span{
+    font-size: 1.6rem;
 }
 ul.productss li:hover .product-info a{
 	color: #c0c906;
@@ -403,6 +413,33 @@ ul.productss li .product-info .product-name{
 
 /*reponsive product*/
 
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .rating input {
+    display: none;
+  }
+
+  .rating label {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .rating label:hover,
+  .rating label:hover ~ label,
+  .rating input:checked ~ label {
+    color: #ffcc00;
+  }
+  .rated {
+    display: flex;
+    
+    
+  }
 
 
 

@@ -11,14 +11,20 @@ if(empty($_SESSION['cart'])) {
     exit;
 }
 
-if(empty($_POST['name_receiver']) || empty($_POST['phone_receiver']) || empty($_POST['address_receiver'])) {
+if(empty($_POST['name_receiver']) || empty($_POST['phone_receiver']) || empty($_POST['district']) || empty($_POST['ward'])|| empty($_POST['address'])) {
+    $_SESSION['error'] = 'Vui lòng điển đầy đủ thông tin';
     header('location:confirminfo.php');
     exit;
 }
 
 $name_receiver = $_POST['name_receiver'];
-$address_receiver = $_POST['address_receiver'];
 $phone_receiver = $_POST['phone_receiver'];
+
+$district = $_POST['district'];
+$ward = $_POST['ward'];
+$address = $_POST['address'];
+
+$address_receiver =   $address .", " . $ward .", ". $district .", "."Hà Nội";
 
 require './cart_function.php';
 $cart = $_SESSION['cart'];
@@ -38,9 +44,13 @@ foreach($cart as $product_id => $each){
     $quantity = $each['quantity'];
     $size = $each['size'];
     $price = $each['price'];
+    $product_id_insert = $each['id'];
+    
     $sql = "insert into order_product(order_id, product_id, size, price, quantity) 
-    values('$last_order_id', '$product_id', $size, $price, '$quantity')";
-    mysqli_query($connect, $sql);
+    values('$last_order_id', '$product_id_insert', $size, $price, '$quantity')";
+    if ($connect->query($sql) != TRUE) {
+        break;
+    }
 }
 
 mysqli_close($connect);

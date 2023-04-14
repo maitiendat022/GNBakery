@@ -112,7 +112,7 @@
           <div class="product-item">
             <div class="product-top">
               <a href="./product.php?id=<?= $each['id'] ?>" class="product-thumb">
-                <img src="./assets/images/products/<?= $each['image'] ?>" alt="">
+                <img  src="./assets/images/products/<?= $each['image'] ?>" alt="">
 
               </a>
             </div>

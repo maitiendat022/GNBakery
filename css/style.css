@@ -435,11 +435,9 @@ ul.products li .product-info .product-name{
     line-height: 40px;
     background: #c0c906;
     color: #fff;
-   
     border-top-right-radius: 10px;
-    
     z-index: 2;
-
+	margin-bottom: 0;
 	}
 	ul.products li .product-info .product-price-action .product-action{
 		display: inline-block;

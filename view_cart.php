@@ -4,9 +4,9 @@ require './database/connect.php';
 require 'check_user_cart.php';
 
 
+$id = $_GET['id'];
 $size = $_GET['size-btn'];
 
-$id = $_GET['id'];
 $sql = "select products.* ,price from products
 join products_size on products.id = products_size.product_id
 where products.id = '$id' and products_size.size = $size";
@@ -24,7 +24,7 @@ if($quantity <= 0){
 }
 
 $item = [
-  'id' =>$each['id'],
+  'id' => $each['id'],
   'name' => $each['name'],
   'image' => $each['image'],
   'size' => $size,
@@ -32,25 +32,24 @@ $item = [
   'quantity' => $quantity
 ];
 
-if($action == 'add'){
+$cart_item_key = $id . '-' . $size;
 
-    if(isset($_SESSION['cart'][$id])){
-       $_SESSION['cart'][$id]['quantity'] += $quantity;
-      }
-    else {
-       $_SESSION['cart'][$id] = $item;
-         }
+if ($action == 'add') {
+  if (isset($_SESSION['cart'][$cart_item_key])) {
+    $_SESSION['cart'][$cart_item_key]['quantity'] += $quantity;
+  } else {
+    $_SESSION['cart'][$cart_item_key] = $item;
+  }
 }
 if($action == 'delete'){
 
-unset($_SESSION['cart'][$id]);
+unset($_SESSION['cart'][$cart_item_key]);
  }
 if($action == 'update'){
-$_SESSION['cart'][$id]['quantity'] = $quantity;
+$_SESSION['cart'][$cart_item_key]['quantity'] = $quantity;
 }
 
 header('location:cart.php');
 echo "<pre>";
 print_r($_SESSION['cart']);
 
-?>

@@ -112,7 +112,7 @@ $resultBanh = mysqli_query($connect,$sqlBanh);
                 </td>
                 <td class="item-totall-price" data-label="Tổng giá">
 
-                  <span class="item-price">
+                  <span  class="item-price">
                     <?php echo number_format($rowBanh['price'] * $rowBanh['quantity']) ?>&#8363
                   </span>
 
@@ -131,7 +131,7 @@ $resultBanh = mysqli_query($connect,$sqlBanh);
                 <div class="row-total">
 					<div class="cart-price-right">
 						<p>
-							<span class="cart__subtotal-title">Tổng tiền</span><br>
+							<span class="cart__subtotal-title">Tổng tiền:</span>
 							<span class="cart__subtotal"><?= number_format($rowTtin['total_price'], 0, '.', ' ') ?>&#8363</span>
 						</p>
 			
