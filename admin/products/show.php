@@ -80,6 +80,43 @@
             <?= nl2br($each['description']) ?>
         </div>
     </div>
+    <div class = "ratings-1">
+    <h3>Đánh giá sản phẩm</h3>
+    <hr>
+    <div id="Content" class="tabs_rating-1">
+    <?php
+      $product_id = $each['id']; // ID của sản phẩm cần hiển thị đánh giá
+      $sql = "SELECT ratings.star, ratings.created_at, ratings.comment, users.name FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.product_id = '$product_id'";
+      $result = $connect->query($sql);
+      if(mysqli_num_rows($result)<1){
+        echo '<span>Sản phẩm hiện tại chưa có đánh giá</span>';
+      }
+    ?>
+      <?php while($row = $result->fetch_assoc()): ?>
+        <div class="tab-rating-1">
+            <span class="user-1"><?php echo $row['name']; ?></span>
+            <div >
+              <span class="star-rating-1">
+            <?php
+              $star = $row['star'];
+              for ($i = 1; $i <= 5; $i++) {
+                if ($i <= $star) {
+                    echo '<i class="fas fa-star"></i>'; 
+                } else {
+                    echo '<i class="far fa-star"></i>'; 
+                }
+              }
+            ?>
+              </span>
+              <span class="created_at-1"><?php echo $row['created_at']; ?></span>
+              <span class="comment-1"><?php echo $row['comment']; ?></span>
+            </div>
+        </div>
+        <hr>
+    <?php endwhile; ?>
+    </div>
+    
+  </div>
     
 
 </div>
@@ -145,6 +182,7 @@
   });
   
 </script>
+
 </body>
 
 </html>

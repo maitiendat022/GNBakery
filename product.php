@@ -145,6 +145,55 @@ if(mysqli_num_rows($result) > 0) {
   
     </div>
   </div>
+  <div class = "ratings-1">
+    <h4>Đánh giá sản phẩm</h4>
+    <hr>
+    <div id="Content" class="tabs_rating-1">
+    <?php
+      $product_id = $each['id']; // ID của sản phẩm cần hiển thị đánh giá
+      $sql = "SELECT ratings.star, ratings.created_at, ratings.comment, users.name FROM ratings INNER JOIN users ON ratings.user_id = users.id WHERE ratings.product_id = '$product_id'";
+      $result = $connect->query($sql);
+      if(mysqli_num_rows($result)<1){
+        echo '<span>Sản phẩm hiện tại chưa có đánh giá</span><br>';
+      }
+    ?>
+      <?php while($row = $result->fetch_assoc()): ?>
+        <div class="tab-rating-1">
+            <span class="user-1"><?php echo $row['name']; ?></span>
+            
+            <div >
+              <span class="star-rating-1">
+            <?php
+              $star = $row['star'];
+              for ($i = 1; $i <= 5; $i++) {
+                if ($i <= $star) {
+                    echo '<i class="fas fa-star"></i>'; 
+                } else {
+                    echo '<i class="far fa-star"></i>'; 
+                }
+              }
+            ?>
+              </span>
+              <span class="created_at-1"><?php echo $row['created_at']; ?></span>
+              <span class="comment-1"><?php echo $row['comment']; ?></span>
+            </div>
+        </div>
+        <hr>
+      <?php endwhile; ?>
+      <?php if(isset($_GET['status_order']) && isset($_GET['id_order']) && isset($_GET['id_user']) && $_GET['status_order'] == 3 && $_GET['id_user'] == $_SESSION['id']){
+            $id_user = $_GET['id_user'];
+            $id_order = $_GET['id_order'];
+            $id_product = $_GET['id'];
+            $sqlRating = "SELECT * from ratings where user_id = $id_user and product_id = $id_product and order_id = $id_order";
+            $resultRating = mysqli_query($connect,$sqlRating);
+            if(mysqli_num_rows($resultRating) > 0){?>
+                <span>Bạn đã đánh giá sản phẩm</span>
+      <?php }else{?>
+                <button class= "btn-rating" style = "display:block;" type ="button"onclick="showPasswordForm()">Đánh giá</button>
+      <?php }
+      }?>
+    </div>
+  </div>
 
   <div id="Home-notice">
     <div class="latest-wrap">
@@ -349,7 +398,7 @@ if(mysqli_num_rows($result) > 0) {
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-  
+  <script src="./assets/js/notify.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/product.js"></script>
   <script>
@@ -394,7 +443,7 @@ if(mysqli_num_rows($result) > 0) {
       const selectedId = event.target.dataset.id;
       a = button.getAttribute('data-size');
       sizeButtons.forEach((button) => {
-      button.style.backgroundColor = "";// Xóa màu nền của tất cả các thẻ kích thước
+      button.style.backgroundColor = "";
       saveSize.value = a;
     });
         event.target.style.backgroundColor = "#ffbfbf";
@@ -403,6 +452,70 @@ if(mysqli_num_rows($result) > 0) {
     });
   });
 </script>
-</body>
+<script>
+    $(".rating input:radio").change(function() {
+      $(this).closest(".rating").find("label").removeClass("selected");
+      $(this).closest("label").addClass("selected");
+    });
+  </script>
+   <script>
+		function showPasswordForm() {
+			document.getElementById("overlay").style.display = "block";
+			document.getElementById("password-form").style.display = "block";
+		}
 
+		function hidePasswordForm() {
+			document.getElementById("overlay").style.display = "none";
+			document.getElementById("password-form").style.display = "none";
+		}
+	</script>
+  <script>
+    $('document').ready( function() {
+      $.notify("<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>", "success");
+    } );
+  </script>
+</body>
+<div <?php if(isset( $_GET['error'])){
+                                              echo 'style = "display: block;"';
+                                          }else{
+                                            echo 'style = "display: none;"';
+                                          }?>id="overlay" class="overlay">
+  <div <?php if(isset( $_GET['error'])){
+                                              echo 'style = "display: block;"';
+                                          }else{
+                                            echo 'style = "display: none;"';
+                                          }?>id="password-form" class="form-container" >
+    <div>
+      <h3 style="margin-bottom:30px;color:#FF1493;">Đánh giá</h3> 
+      <span style="padding:10px;color:red;font-size:35px;" class="close-button" onclick="hidePasswordForm()">&times;</span>
+    </div>
+    <form method="post" action="process_ratings.php">
+        <input hidden type="text" value = "<?= $_SESSION['id']?>" name ="user_id">
+        <input hidden type="text" value = "<?= $_GET['id_order']?>" name ="order_id">
+        <input hidden value = "<?= $each['id']?>"type="text" id="product_id" name="product_id" >
+        <small style = "color:red;"><?php echo $_GET['error'] ?? ''?></small>
+      <div style="display: flex; align-items: center; margin-bottom:20px">
+        <label style="margin-right:45px;" for="rating">Vote:</label>
+        <div  class="rating">
+          <input type="radio" id="star5" name="rating" value="5">
+          <label for="star5"><i class="fas fa-star"></i></label>
+          <input type="radio" id="star4" name="rating" value="4">
+          <label for="star4"><i class="fas fa-star"></i></label>
+          <input type="radio" id="star3" name="rating" value="3">
+          <label for="star3"><i class="fas fa-star"></i></label>
+          <input type="radio" id="star2" name="rating" value="2">
+          <label for="star2"><i class="fas fa-star"></i></label>
+          <input type="radio" id="star1" name="rating" value="1">
+          <label for="star1"><i class="fas fa-star"></i></label>
+        </div><br>
+      </div>
+      <div  style="display: flex; margin-bottom:30px">
+        <label style="margin-right:15px;" for="comment">Nhận xét:</label>
+        <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br>
+        
+      </div>
+      <input type="submit" value="Đánh giá">
+      </form>
+  </div>
+</div>
 </html>

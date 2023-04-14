@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="../../assets/css/responsive_admin.css">
     <link rel="stylesheet" href="../../assets/css/detail_orders.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/admin_order.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
     <title>ADMIN-GN Bakery</title>
 </head>
 <body>
@@ -192,9 +194,7 @@
             </button>
         </div>
         <a class="header-text" href="">GNBakery</a>
-        <form action="" class="form__search hide-on-mobile-tablet">
-            <input type="search" name="search" class="input__search" value="<?php $search?? '' ?>" placeholder="Nhập tên để tìm kiếm">
-        </form>
+        
         <div class="header__user d-flex align-items-center">
             <img class="header__user-img" src="../../assets/images/admin/<?= $_SESSION['image'] ?>" alt="avt-user">
             <span class="header__user-name"><?= $_SESSION['name'] ?></span>

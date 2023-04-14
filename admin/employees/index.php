@@ -42,6 +42,7 @@
             <div class="container-fluid">
             <div class="row gx-5">
                 <div class="col-12">
+                <?php include '../error_success.php' ?>
                     <div class="table-responsive-sm">
                         <table class="order_table table table-sm table-light align-middle">
                             <thead style = "text-align : center;">
@@ -85,11 +86,11 @@
                                         <div class="two_buttons">
                                             <?php if( $each['status'] == 1) { ?>
                                             <a href="./form_update.php?id=<?= $each['id'] ?>" style = "width:60px;"class = "btnBrowser">Sửa</a>
-                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="./update_status.php?id=<?= $each['id'] ?>&status=0&admin_id=<?=$admin_id ?>" style = "width:60px;">Xóa</a>
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="./update_status.php?id=<?= $each['id'] ?>&status=1&admin_id=<?=$admin_id ?>&page=<?=$page_current?>" style = "width:60px;">Xóa</a>
                                          
                                         </div>
                                         <?php }if($each['status'] == 0){
-                                            ?><a onclick="return confirm('Bạn chắc chắn muốn khôi phục lại tài khoản?')" href="./update_status.php?id=<?= $each['id'] ?>&status=1&admin_id=<?=$admin_id ?>">Khôi phục</a>
+                                            ?><a onclick="return confirm('Bạn chắc chắn muốn khôi phục lại tài khoản?')" href="./update_status.php?id=<?= $each['id'] ?>&status=0&admin_id=<?=$admin_id ?>&page=<?=$page_current?>">Khôi phục</a>
                                         <?php } ?> 
                                     </th>
                                 </tr>

@@ -95,14 +95,19 @@
                                             case 2:
                                                 echo "Đã huỷ";
                                                 break;
+                                            case 3:
+                                                  echo "Đã giao";
+                                                  break;
                                         }
                                         ?></td>
    
               <td style = "padding-left:20px;"class="sttt-shopping"><a class="detail-txt" href="order_product.php?order_id=<?php echo $rowOrder['id'] ?>&status=<?= $rowOrder['status'] ?>"><i class="fa-regular fa-eye"></i></a></td>
               <?php if($rowOrder['status']==0){?>
-                <td class="sttt-shopping"><a class="detail-txt"onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')" href="update_status_oder.php?order_id=<?php echo $rowOrder['id'] ?>">Hủy đơn</a></td>
+                <td class="sttt-shopping"><a class="detail-txt"onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')" href="update_status_oder.php?order_id=<?php echo $rowOrder['id'] ?>&status=2">Hủy đơn</a></td>
               <?php }if($rowOrder['status']==1){?>
-                <td>Đơn hàng đã được duyệt</td>
+                <td class="sttt-shopping"><a class="detail-txt"onclick="return confirm('Bạn chắc chắn xác nhận đã nhận hàng?')" href="update_status_oder.php?order_id=<?php echo $rowOrder['id'] ?>&status=3">Nhận hàng</a></td>
+              <?php }if($rowOrder['status']==3){?>
+                <td>Đã nhận hàng</td>
               <?php }if($rowOrder['status']==2){
                         $user_id = $rowOrder['id_status'];
                         $sql = "SELECT level FROM users WHERE id = $user_id";

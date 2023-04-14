@@ -804,3 +804,44 @@ vertical-align: middle; }
        margin: 0 18px;
     }
 }
+.ratings-1{
+    margin: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ccc ; 
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 1.4rem;
+}
+.ratings-1 h4{
+    color: #FF1493;
+}
+.tabs_rating-1{
+    padding: 20px;
+}
+.tab-rating-1{
+    display: flex;
+    width: 100%;
+}
+.tab-rating-1 .user-1{
+    margin-right: 20px;
+    width: 5%;
+    padding-left: 20px;
+    border-right: 1px solid #ccc ;
+}
+.tab-rating-1 span{
+    margin-bottom: 20px;
+    
+}
+.tab-rating-1 div{
+    display: flex;
+    flex-direction: column;
+}
+.rating-1 {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 40px;
+  }
+.tab-rating-1 .star-rating-1{
+    color: #fd94cc;
+    margin-bottom: 10px;
+}

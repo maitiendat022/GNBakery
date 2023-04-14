@@ -4,13 +4,21 @@
     
     $id_order = $_GET['order_id'];
     $id_user = $_SESSION['id'];
+    $status = $_GET['status'];
 
-    $sql = "update orders set status = 2, id_status = '$id_user' 
-    where id = '$id_order'";
-  
-    mysqli_query($connect, $sql);
-
-    $_SESSION['success'] = 'Hủy đơn hàng thành công';
+    if($status == 2){
+        $sql = "update orders set status = 2, id_status = '$id_user', time_status = NOW()
+        where id = '$id_order'";
+        mysqli_query($connect, $sql);
+        $_SESSION['success'] = 'Hủy đơn hàng thành công';
+    }
+    if($status == 3){
+        $sql = "update orders set status = 3, id_status = '$id_user', time_status = NOW()
+        where id = '$id_order'";
+        mysqli_query($connect, $sql);
+        $_SESSION['success'] = 'Xác nhận nhận hàng thành công';
+    }
+   
     header('location:user.php');
 
 ?>

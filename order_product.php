@@ -7,7 +7,7 @@ if(empty($_SESSION['id'])){
 $status = $_GET['status'];
 $idCus = $_SESSION['id'];
 $idOrder = $_GET['order_id'];
-$sqlTtin = "SELECT id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, status, total_price FROM orders WHERE id = $idOrder and user_id = $idCus";
+$sqlTtin = "SELECT id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, DATE_FORMAT(time_status, '%d/%m/%Y %T') as time_status, status, total_price FROM orders WHERE id = $idOrder and user_id = $idCus";
 $resultTtin = mysqli_query($connect,$sqlTtin);
 $rowTtin = mysqli_fetch_assoc($resultTtin);
 
@@ -54,16 +54,21 @@ $resultBanh = mysqli_query($connect,$sqlBanh);
                     <h1>Thông tin sản phẩm:</h1>
                  </div>
                   <div class="order-right">
-                    <p class="order-text" >Trạng thái: <?php switch ($status) {
+                    <p class="order-text" >Trạng thái: <?php 
+                                            $time_status = $rowTtin['time_status'];
+                                          switch ($status) {
                                             case 0:
                                                 echo "Đơn hàng chưa được duyệt";
                                                 break;
                                             case 1:
-                                                echo "Nguời gửi đang chuẩn bị hàng";
+                                                echo "Người gửi đang giao hàng";
                                                 break;
                                             case 2:
                                                 echo "Đơn hàng đã bị huỷ";
                                                 break;
+                                            case 3:
+                                                echo "Bạn đã nhận hàng lúc $time_status";
+                                                  break;
                                         }
                                         ?> </p> 
                  </div>
@@ -89,7 +94,7 @@ $resultBanh = mysqli_query($connect,$sqlBanh);
               <tr class="spaceUnder">
 
                 <td class="item-img" data-label="Sản phẩm">
-                  <a href="" class="cart__image">
+                  <a href="./product.php?id=<?= $rowBanh['id'] ?>&id_order=<?=$idOrder?>&id_user=<?=$idCus?>&status_order=<?=$status?>" class="cart__image">
                     <img src="./assets/images/products/<?php echo $rowBanh['image'] ?>">
                   </a>
                 </td>

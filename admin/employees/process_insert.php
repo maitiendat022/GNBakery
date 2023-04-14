@@ -20,34 +20,28 @@ $sqlEmail = "SELECT * FROM users WHERE email = '$email' and level = 2";
 $resultEmail = mysqli_query($connect,$sqlEmail);
 if(mysqli_num_rows($resultEmail) > 0){
     $_SESSION['error'] = 'Email đã tồn tại'; 
-    header('location:form_insert.php');
-    exit();
-}
-if(strlen($password) < 6){
-    $_SESSION['error'] = 'Mật khẩu phải dài hơn 6 kí tự'; 
-    header('location:form_insert.php');
-}          
-$pass_hash = password_hash($password, PASSWORD_DEFAULT);
+}else{
+    if(strlen($password) < 6){
+        $_SESSION['error'] = 'Mật khẩu phải dài hơn 6 kí tự'; 
+    }else{
+        $pass_hash = password_hash($password, PASSWORD_DEFAULT);
        
-$sql = "insert into users(name, email, password, phone, address, gender, birthday, level)
-values(?, ?, ?, ?, ?, ?, ?, ?)";
-
-$stmt = mysqli_prepare($connect, $sql);
-if($stmt) {
-    mysqli_stmt_bind_param($stmt, 'sssssssi', $name, $email, $pass_hash, $phone, $address, $gender, $birthday, $level);
-    mysqli_stmt_execute($stmt);
-
-    $_SESSION['success'] = 'Đã thêm thành công';
-    die($_SESSION['success']);
+        $sql = "insert into users(name, email, password, phone, address, gender, birthday, level)
+        values(?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        $stmt = mysqli_prepare($connect, $sql);
+        if($stmt) {
+            mysqli_stmt_bind_param($stmt, 'sssssssi', $name, $email, $pass_hash, $phone, $address, $gender, $birthday, $level);
+            mysqli_stmt_execute($stmt);
+            $_SESSION['success'] = 'Đã thêm thành công';
+            mysqli_stmt_close($stmt);
+        }
+        else {
+            $_SESSION['error'] = 'Không thể chuẩn bị truy vấn!';
+        }
+    }
 }
-else {
-    $_SESSION['error'] = 'Không thể chuẩn bị truy vấn!';
-    die($_SESSION['error']);
-    header('location:form_insert.php');
-    exit();
-}
+         
 
-mysqli_stmt_close($stmt);
 mysqli_close($connect);
-
 header('location:form_insert.php');

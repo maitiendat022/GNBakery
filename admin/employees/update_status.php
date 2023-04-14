@@ -6,31 +6,21 @@ if(empty($_GET['id'])) {
     header('location:index.php');
     exit();
 }
-  
-if($_GET['admin_id'] != $_SESSION['id'] || $_SESSION['level'] != 1) {
-    $_SESSION['error'] = 'Bạn không có quyền để xóa';
-    header('location:index.php');
-    exit();
-}
-
+    
 $id = $_GET['id'];
+$page = $_GET['page'];
 $status = $_GET['status'];
 $admin_id = $_GET['admin_id'];
 require_once '../../database/connect.php';
+if($status == 1){
+    $sql = "update users set status = 0, id_deleted = $admin_id where id = $id";
+    $result = mysqli_query($connect,$sql); 
+    $_SESSION['success'] = 'Xóa tài khoản thành công';
 
-$sql = "update users set status = $status, id_deleted = $admin_id where id = $id";
-$result = mysqli_query($connect,$sql); 
-if(isset($result) >0){
-    $_SESSION['success'] = 'Đã xóa thành công';
-    
-    header("location:index.php");
-    exit();
+}else{
+    $sql = "update users set status = 1, id_deleted = $admin_id where id = $id";
+    $result = mysqli_query($connect,$sql); 
+    $_SESSION['success'] = 'Khôi phục tài khoản thành công';
+ 
 }
-else {
-    $_SESSION['error'] = 'Không thể chuẩn bị truy vấn!';
-    
-    header("location:index.php");
-    exit();
-}
-
-header('location:index.php');
+header("location:index.php?page=$page");

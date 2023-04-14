@@ -78,7 +78,7 @@
                                     <th scope="col">
                                         <div class="two_buttons">
                                             <?php if($each['status'] == 1) { ?>
-                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="./update_status.php?id=<?= $each['id'] ?>&status=1">Xóa</a>
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa?')" href="./update_status.php?id=<?= $each['id'] ?>&status=1&level=<?=$level?>&page=<?=$page_current?>">Xóa</a>
                                             <?php }if($each['status'] == 0) { 
                                                     $idLevel = $each['id_deleted'];
                                                     $sqlLevel = "select level from users where id = $idLevel";
@@ -95,7 +95,7 @@
                                         </div>
 
                                         <div>
-                                            <a style = "text-decoration: none;"  onclick="return confirm('Bạn chắc chắn muốn khôi phục?')" href="./update_status.php?id=<?= $each['id'] ?>&status=0&level=<?=$level?>">Khôi phục</a>
+                                            <a style = "text-decoration: none;"  onclick="return confirm('Bạn chắc chắn muốn khôi phục?')" href="./update_status.php?id=<?= $each['id'] ?>&status=0&level=<?=$level?>&page=<?=$page_current?>">Khôi phục</a>
                                         <?php } ?>
                                         </div>
                                     </th>

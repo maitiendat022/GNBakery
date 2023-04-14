@@ -19,7 +19,7 @@
 
     $num_page = ceil($num_order / $num_order_per_page);
     $skip_page = $num_order_per_page * ($page_current - 1);
-    $sql = "SELECT orders.id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, orders.status,id_status, users.name 
+    $sql = "SELECT orders.id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, orders.status,id_status, users.name,DATE_FORMAT(time_status, '%d/%m/%Y %T') as time_status
     from orders
     join users on orders.user_id = users.id
     limit $num_order_per_page offset $skip_page";
@@ -75,6 +75,9 @@
                                             case 2:
                                                 echo "Đã huỷ";
                                                 break;
+                                            case 3:
+                                                echo "Đã nhận";
+                                                break;
                                         }
                                         ?>
                                     </th>
@@ -89,25 +92,34 @@
                                                 $level = $rowUser_status['level'];
                                             }                                           
                                             if($each['status'] == 1 && $level ==1) {
-                                            ?> <span>Quản trị viên đã duyệt đơn</span>
+                                            ?> <span>Quản trị viên đã duyệt đơn</span><br>
+                                                <span><?=$each['time_status']?></span>
                                             <?php
                                             }if($each['status'] == 2 && $level == 1){
-                                            ?><span>Quản trị viên đã hủy đơn</span>
+                                            ?><span>Quản trị viên đã hủy đơn</span><br>
+                                                <span><?=$each['time_status']?></span>
                                             <?php
                                             }if($each['status'] == 1 && $level == 2){
-                                            ?><span>Nhân viên <a  href="../employees/form_update.php?id=<?=$each['id_status']?>" class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã duyệt đơn</span>
+                                            ?><span>Nhân viên <a  href="../employees/form_update.php?id=<?=$each['id_status']?>" class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã duyệt đơn</span><br>
+                                                <span><?=$each['time_status']?></span>
                                             <?php
                                             }if($each['status'] == 2 && $level == 2){
-                                                ?><span>Nhân viên <a href="../employees/form_update.php?id=<?=$each['id_status']?>" class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã hủy đơn</span>
-                                                <?php
+                                            ?><span>Nhân viên <a href="../employees/form_update.php?id=<?=$each['id_status']?>" class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã hủy đơn</span><br>
+                                                <span><?=$each['time_status']?></span>
+                                            <?php
                                             }if($each['status'] == 2 && $level == 0){
-                                            ?><span>Khách hàng đã hủy đơn</span>
+                                            ?><span>Khách hàng đã hủy đơn</span><br>
+                                                <span><?=$each['time_status']?></span>
+                                            <?php
+                                            }if($each['status'] == 3){
+                                                ?><span>Khách hàng đã nhận hàng</span><br>
+                                                <span><?=$each['time_status']?></span>
                                             <?php
                                             }
                                             if($each['status'] == 0) { ?>
                                             <div class="two_buttons">
-                                                <a href="./update.php?id=<?= $each['id'] ?>&status=1&idUser=<?= $idUser?>" class = "btnBrowser">Duyệt</a>
-                                                <a href="./update.php?id=<?= $each['id'] ?>&status=2&idUser=<?= $idUser?>">Hủy</a>
+                                                <a href="./update.php?id=<?= $each['id'] ?>&status=1&idUser=<?= $idUser?>&page=<?=$page_current?>" class = "btnBrowser">Duyệt</a>
+                                                <a href="./update.php?id=<?= $each['id'] ?>&status=2&idUser=<?= $idUser?>&page=<?=$page_current?>">Hủy</a>
                                             </div>   
                                             <?php } ?>
                                         </div>
