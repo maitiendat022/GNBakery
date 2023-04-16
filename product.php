@@ -180,7 +180,7 @@ if(mysqli_num_rows($result) > 0) {
         </div>
         <hr>
       <?php endwhile; ?>
-      <?php if(isset($_GET['status_order']) && isset($_GET['id_order']) && isset($_GET['id_user']) && $_GET['status_order'] == 3 && $_GET['id_user'] == $_SESSION['id']){
+      <?php if(isset($_GET['status_order']) && isset($_GET['id_order']) && isset($_GET['id_user']) && $_GET['status_order'] == 4 && $_GET['id_user'] == $_SESSION['id']){
             $id_user = $_GET['id_user'];
             $id_order = $_GET['id_order'];
             $id_product = $_GET['id'];

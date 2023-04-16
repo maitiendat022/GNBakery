@@ -12,8 +12,8 @@
         mysqli_query($connect, $sql);
         $_SESSION['success'] = 'Hủy đơn hàng thành công';
     }
-    if($status == 3){
-        $sql = "update orders set status = 3, id_status = '$id_user', time_status = NOW()
+    if($status == 4){
+        $sql = "update orders set status = 4, id_status = '$id_user', time_status = NOW()
         where id = '$id_order'";
         mysqli_query($connect, $sql);
         $_SESSION['success'] = 'Xác nhận nhận hàng thành công';

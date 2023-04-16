@@ -76,6 +76,9 @@
                                                 echo "Đã huỷ";
                                                 break;
                                             case 3:
+                                                echo "Đang giao";
+                                                break;
+                                            case 4:
                                                 echo "Đã nhận";
                                                 break;
                                         }
@@ -91,17 +94,14 @@
                                                 $rowUser_status = mysqli_fetch_array($resultUser_status); 
                                                 $level = $rowUser_status['level'];
                                             }                                           
-                                            if($each['status'] == 1 && $level ==1) {
-                                            ?> <span>Quản trị viên đã duyệt đơn</span><br>
-                                                <span><?=$each['time_status']?></span>
-                                            <?php
-                                            }if($each['status'] == 2 && $level == 1){
+                                            if($each['status'] == 2 && $level == 1){
                                             ?><span>Quản trị viên đã hủy đơn</span><br>
                                                 <span><?=$each['time_status']?></span>
                                             <?php
-                                            }if($each['status'] == 1 && $level == 2){
-                                            ?><span>Nhân viên <a  href="../employees/form_update.php?id=<?=$each['id_status']?>" class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã duyệt đơn</span><br>
-                                                <span><?=$each['time_status']?></span>
+                                            }if($each['status'] == 1){?>
+                                            <div class="two_buttons">
+                                                <a href="./update.php?id=<?= $each['id'] ?>&status=3&idUser=<?= $idUser?>&page=<?=$page_current?>" class = "btnBrowser">Giao hàng</a>
+                                            </div>
                                             <?php
                                             }if($each['status'] == 2 && $level == 2){
                                             ?><span>Nhân viên <a href="../employees/form_update.php?id=<?=$each['id_status']?>" class = "employee" style = "text-decoration: none;" href="">NVGN<?=$each['id_status']?></a> đã hủy đơn</span><br>
@@ -111,9 +111,12 @@
                                             ?><span>Khách hàng đã hủy đơn</span><br>
                                                 <span><?=$each['time_status']?></span>
                                             <?php
-                                            }if($each['status'] == 3){
+                                            }if($each['status'] == 4){
                                                 ?><span>Khách hàng đã nhận hàng</span><br>
                                                 <span><?=$each['time_status']?></span>
+                                            <?php
+                                            }if($each['status'] == 3){
+                                                ?><span>Đang giao hàng</span><br>
                                             <?php
                                             }
                                             if($each['status'] == 0) { ?>

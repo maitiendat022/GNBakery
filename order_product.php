@@ -61,12 +61,15 @@ $resultBanh = mysqli_query($connect,$sqlBanh);
                                                 echo "Đơn hàng chưa được duyệt";
                                                 break;
                                             case 1:
-                                                echo "Người gửi đang giao hàng";
+                                                echo "Người gửi đang chuẩn bị hàng";
                                                 break;
                                             case 2:
                                                 echo "Đơn hàng đã bị huỷ";
                                                 break;
                                             case 3:
+                                                echo "Người gửi đang giao hàng";
+                                                break;
+                                            case 4:
                                                 echo "Bạn đã nhận hàng lúc $time_status";
                                                   break;
                                         }

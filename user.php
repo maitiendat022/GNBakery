@@ -96,7 +96,10 @@
                                                 echo "Đã huỷ";
                                                 break;
                                             case 3:
-                                                  echo "Đã giao";
+                                                echo "Đang giao";
+                                                  break;
+                                            case 4:
+                                                echo "Đã nhận";
                                                   break;
                                         }
                                         ?></td>
@@ -105,9 +108,11 @@
               <?php if($rowOrder['status']==0){?>
                 <td class="sttt-shopping"><a class="detail-txt"onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')" href="update_status_oder.php?order_id=<?php echo $rowOrder['id'] ?>&status=2">Hủy đơn</a></td>
               <?php }if($rowOrder['status']==1){?>
-                <td class="sttt-shopping"><a class="detail-txt"onclick="return confirm('Bạn chắc chắn xác nhận đã nhận hàng?')" href="update_status_oder.php?order_id=<?php echo $rowOrder['id'] ?>&status=3">Nhận hàng</a></td>
+                <td>Đơn hàng đã được duyệt</td>
+                <?php }if($rowOrder['status']==4){?>
+                <td>Bạn đã nhận hàng</td>
               <?php }if($rowOrder['status']==3){?>
-                <td>Đã nhận hàng</td>
+                <td class="sttt-shopping"><a class="detail-txt"onclick="return confirm('Bạn chắc chắn xác nhận đã nhận hàng?')" href="update_status_oder.php?order_id=<?php echo $rowOrder['id'] ?>&status=4">Nhận hàng</a></td>
               <?php }if($rowOrder['status']==2){
                         $user_id = $rowOrder['id_status'];
                         $sql = "SELECT level FROM users WHERE id = $user_id";
