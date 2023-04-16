@@ -21,6 +21,6 @@ $sql = "update products set status = 0, status_id = $admin_id where id = '$id'";
 
 mysqli_query($connect, $sql);
 
-$_SESSION['success'] = 'Đã xóa thành công';
+$_SESSION['success'] = "Đã xóa sản phẩm SPGN$id";
 
 header('location:index.php');

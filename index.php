@@ -25,7 +25,7 @@
   ) as min_price ON products.id = min_price.product_id
   INNER JOIN products_size ON products.id = products_size.product_id AND min_price.price = products_size.price
   INNER JOIN category_detail ON category_detail.id = products.category_detail_id
-  WHERE $where and products.status = 1
+  WHERE $where 
   ORDER BY category_detail.id ASC, products.id DESC";
 
   $result = mysqli_query($connect, $sql);
@@ -122,10 +122,10 @@
               <div class="product-price-action">
                 <p class="product-price"><?= number_format($each['price'], 0, '.', ',') ?></p>
                 <div class="product-action">
-              <form action="view_cart.php" method="GET">
+              <form action="process_size.php" method="GET">
                 <input type="hidden" name="id" value="<?php echo $each['id'] ?>" >
                 <input type="hidden" name="size-btn" id="save-size" value="<?=$each['size']?>" >
-                <button   type="submit" name="addcart" class="btn-action"><i class="bi bi-cart-fill"></i></button>
+                <button  type="submit" name="addcart" class="btn-action"><i class="bi bi-cart-fill"></i></button>
               </form>
                 </div>
               </div>

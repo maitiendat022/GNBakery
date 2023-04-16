@@ -12,7 +12,7 @@ INNER JOIN (
   GROUP BY product_id
 ) min_price ON p.id = min_price.product_id
 INNER JOIN products_size ps ON min_price.product_id = ps.product_id AND min_price.price = ps.price
-WHERE p.name LIKE '%$search%' AND p.status = 1";
+WHERE p.name LIKE '%$search%' ";
 $result = mysqli_query($connect,$sql);
 
 $arr = [];

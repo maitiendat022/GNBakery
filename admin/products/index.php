@@ -119,7 +119,7 @@
                                             </td>
                                         <?php } else { ?>
                                             <td colspan="2">    
-                                                <a href="update_status.php?id=<?= $each['id'] ?>">
+                                                <a onclick="return confirm('Bạn chắc chắn muốn mở bán lại sản phẩm?')" href="update_status.php?id=<?= $each['id'] ?>">
                                                     Mở bán
                                                 </a>
                                             </td>

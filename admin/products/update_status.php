@@ -7,11 +7,6 @@ if(empty($_GET['id'])) {
     exit();
 }
   
-if($_SESSION['level'] == 0) {
-    $_SESSION['error'] = 'Bạn không có quyền để truy cập';
-    header('location:index.php');
-    exit();
-}
 if($_SESSION['level'] == 2) {
     $_SESSION['error'] = 'Bạn không có quyền mở bán lại';
     header('location:index.php');
@@ -30,5 +25,5 @@ mysqli_query($connect, $sql);
 
 mysqli_close($connect);
 
-$_SESSION['success'] = 'Đã mở bán thành công';
+$_SESSION['success'] = "Đã mở bán lại sản phẩm SPGN$id";
 header('location:index.php');

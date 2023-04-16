@@ -12,7 +12,7 @@ if($status == 1){
     $sql = "update users set status = 0, id_deleted = $admin_id where id = $id";
     $result = mysqli_query($connect,$sql); 
     if(isset($result) >0){ 
-        $_SESSION['success'] = "Xóa tài khoản thành công";
+        $_SESSION['success'] = "Bạn đã xóa tài khoản khách hàng KHGN$id";
         header("location:index.php?page=$page");
         exit();
     }
@@ -21,7 +21,7 @@ if($status == 0 && $level == 1){
     $sql = "update users set status = 1,id_deleted = $admin_id where id = $id";
     $result = mysqli_query($connect,$sql); 
     if(isset($result) >0){ 
-        $_SESSION['success'] = "Khôi phục tài khoản thành công";
+        $_SESSION['success'] = "Khôi phục tài khoản KHGN$id thành công";
         header("location:index.php?page=$page");
         exit();
     }

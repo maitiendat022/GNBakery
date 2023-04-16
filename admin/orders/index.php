@@ -4,10 +4,20 @@
     require_once '../navbar-vertical.php';
     require_once '../../database/connect.php';
 
+    $where = '1';
     $idUser = $_SESSION['id'];
     $page_current = 1;
     if(isset($_GET['page'])) {
         $page_current = $_GET['page'];
+    }
+
+    if(isset($_GET['search_status'])) {
+        $where = 'orders.status like ' . $_GET['search_status'];
+    }
+    $search = '';
+    if(isset($_GET['search'])) {
+        $search = htmlspecialchars($_GET['search'], ENT_QUOTES);
+        $where = " users.name like '%$search%' or orders.id like '%$search%'";
     }
 
     $sql_num_order = "select count(*) from orders";
@@ -19,9 +29,11 @@
 
     $num_page = ceil($num_order / $num_order_per_page);
     $skip_page = $num_order_per_page * ($page_current - 1);
-    $sql = "SELECT orders.id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, orders.status,id_status, users.name,DATE_FORMAT(time_status, '%d/%m/%Y %T') as time_status
+    $sql = "SELECT users.name, orders.id, name_receiver, address_receiver, phone_receiver, DATE_FORMAT(created_at, '%d/%m/%Y %T') as created_at, orders.status,id_status, users.name,DATE_FORMAT(time_status, '%d/%m/%Y %T') as time_status
     from orders
     join users on orders.user_id = users.id
+    where $where
+    ORDER BY status asc,id DESC
     limit $num_order_per_page offset $skip_page";
     $result = mysqli_query($connect, $sql);
 
@@ -37,7 +49,9 @@
             <div class="row gx-5">
                 <div class="col-12">
                     <div class="table-responsive-sm">
+                    <?php include '../error_success.php'; ?>
                         <table class="order_table table table-sm table-light align-middle">
+                            
                             <thead style = "text-align : center;">
                                 <tr>
                                     <th class = "id-product" scope="col">Mã đơn</th>

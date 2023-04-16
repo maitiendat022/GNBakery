@@ -1,5 +1,9 @@
 <?php 
-
+session_start();
+if(empty($_SESSION['id'])){
+    header('location:./signin.php');
+    exit();
+}
 require './database/connect.php';
 require 'check_user_cart.php';
 
@@ -13,6 +17,12 @@ where products.id = '$id' and products_size.size = $size";
 
 $result = mysqli_query($connect, $sql);
 $each = mysqli_fetch_array($result);
+
+if($each['status']==0){
+  $_SESSION['success'] = 'Sản phẩm này đã ngừng bán vui lòng chọn sản phẩm khác';
+  header("location: ./index.php");   
+  exit;   
+}
 
 $action =(isset($_GET['action'])) ? $_GET['action'] : 'add';
 
@@ -36,17 +46,20 @@ $cart_item_key = $id . '-' . $size;
 
 if ($action == 'add') {
   if (isset($_SESSION['cart'][$cart_item_key])) {
+    $_SESSION['success'] = 'Thêm thành công'; 
     $_SESSION['cart'][$cart_item_key]['quantity'] += $quantity;
   } else {
+    $_SESSION['success'] = 'Thêm thành công';
     $_SESSION['cart'][$cart_item_key] = $item;
   }
 }
 if($action == 'delete'){
-
-unset($_SESSION['cart'][$cart_item_key]);
+  $_SESSION['success'] = 'Đã xóa sản phẩm khỏi giỏ';
+  unset($_SESSION['cart'][$cart_item_key]);
  }
 if($action == 'update'){
-$_SESSION['cart'][$cart_item_key]['quantity'] = $quantity;
+  $_SESSION['success'] = 'Thêm thành công';
+  $_SESSION['cart'][$cart_item_key]['quantity'] = $quantity;
 }
 
 header('location:cart.php');

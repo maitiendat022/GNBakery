@@ -124,8 +124,12 @@ if(mysqli_num_rows($result) > 0) {
               </div>
 
               <div class="product-actions">
+                <?php if($each['status'] == 1){?>
                 <button type="submit" name="add" id="AddToCart" class="btnAddtocart">Thêm vào giỏ hàng</button>
               </div>
+              <?php }else{?>
+                <h4 style= "color:red">Sản phẩm hiện đã ngừng bán</h4>
+                <?php }?>
             </div>
   
    </div>

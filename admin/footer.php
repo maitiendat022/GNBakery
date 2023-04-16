@@ -4,7 +4,10 @@
                     <li class="pagination-item
                         <?php if($i == $page) { echo 'pagination-item--active';} ?>
                     ">
-                        <a href="?page=<?php echo $i ?>" class="pagination-item__link">
+                        <a href="?page=<?php echo $i ?><?php if(isset($_GET['search_status'])){ 
+                                                                    $a = $_GET['search_status'] ;
+                                                                    echo "&search_status=$a" ;
+                                                                    }?>" class="pagination-item__link">
                             <?php echo $i ?>
                         </a>
                     </li>

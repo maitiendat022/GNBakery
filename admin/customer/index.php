@@ -9,6 +9,11 @@
     if(isset($_GET['page'])) {
         $page_current = $_GET['page'];
     }
+    $search = '';
+    if(isset($_GET['search'])) {
+        $search = htmlspecialchars($_GET['search'], ENT_QUOTES);
+        $where = " users.name like '%$search%' or users.id like '%$search%' or users.email like '%$search%' or users.phone like '%$search%' or users.address like '%$search%'";
+    }
 
     $sql_num_order = "select count(*) from orders";
     $arr_num_order = mysqli_query($connect, $sql_num_order);
@@ -19,7 +24,8 @@
 
     $num_page = ceil($num_order / $num_order_per_page);
     $skip_page = $num_order_per_page * ($page_current - 1);
-    $sql = "Select *,DATE_FORMAT(created, '%Y/%m/%d') as date from users where level = 0
+    $sql = "Select *,DATE_FORMAT(created, '%Y/%m/%d') as date from users where level = 0 and ($where)
+    ORDER BY status asc,id DESC
     limit $num_order_per_page offset $skip_page";
     $result = mysqli_query($connect, $sql);
 

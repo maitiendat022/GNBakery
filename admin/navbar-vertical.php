@@ -59,6 +59,25 @@
                         <i class="navbar__link-icon bi bi-cart-dash-fill"></i>
                         <span>Đơn hàng</span> 
                     </a>
+                    <div class="sub-navbar">
+                        <ul class="list-group">
+                            <li class="sub-navbar__item">
+                                <a class="sub-navbar__link list-group-item-action text-decoration-none" href="../orders?search_status=0">Mới đặt</a>
+                            </li>
+                            <li class="sub-navbar__item">
+                                <a class="sub-navbar__link list-group-item-action text-decoration-none" href="../orders?search_status=1">Đã duyệt</a>
+                            </li>
+                            <li class="sub-navbar__item">
+                                <a class="sub-navbar__link list-group-item-action text-decoration-none" href="../orders?search_status=2">Đã hủy</a>
+                            </li>
+                            <li class="sub-navbar__item">
+                                <a class="sub-navbar__link list-group-item-action text-decoration-none" href="../orders?search_status=3">Đang giao</a>
+                            </li>
+                            <li class="sub-navbar__item">
+                                <a class="sub-navbar__link list-group-item-action text-decoration-none" href="../orders?search_status=4">Đã nhận</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item navbar__item">
                     <a class="nav-link d-flex align-items-center navbar__link <?= $page == 'products'?'active':'' ?>" href="../products">
@@ -194,7 +213,9 @@
             </button>
         </div>
         <a class="header-text" href="">GNBakery</a>
-        
+        <form action="" class="form__search hide-on-mobile-tablet">
+            <input type="search" name="search" class="input__search" value="<?php $search?? '' ?>" placeholder="Nhập tên để tìm kiếm">
+        </form>
         <div class="header__user d-flex align-items-center">
             <img class="header__user-img" src="../../assets/images/admin/<?= $_SESSION['image'] ?>" alt="avt-user">
             <span class="header__user-name"><?= $_SESSION['name'] ?></span>
