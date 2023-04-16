@@ -72,11 +72,14 @@ $each = mysqli_fetch_array($result);
             <div>
               <label for="district">Quận/Huyện:</label>
               <select class="form-control" id="district" name="district">
-                <option value="">-- Chọn Quận/Huyện --</option>
+                <option value="">--Chọn Quận/Huyện--</option>
                 <option value="Ba Đình">Ba Đình</option>
                 <option value="Hoàn Kiếm">Hoàn Kiếm</option>
-                <option value="Hai Bà Trưng">Hai Bà Trưng</option>
                 <option value="Đống Đa">Đống Đa</option>
+                <option value="Thanh Xuân">Thanh Xuân</option>
+                <option value="Cầu giấy">Cầu giấy</option>
+                <option value="Hoàng Mai">Hoàng Mai</option>
+                <option value="Hai Bà Trưng">Hai Bà Trưng</option>
                 <option value="Tây Hồ">Tây Hồ</option>
               </select><br>
             </div>
@@ -250,11 +253,14 @@ $each = mysqli_fetch_array($result);
   $(document).ready(function() {
     // Lấy danh sách các quận/huyện từ một nguồn dữ liệu nào đó
     var districts = [
-      { name: "Ba Đình", wards: ["Phúc Xá", "Ngọc Hà", "Điện Biên", "Vĩnh Phúc", "Cống Vị"] },
-      { name: "Hoàn Kiếm", wards: ["Tràng Tiền", "Trần Hưng Đạo", "Hàng Bài", "Phan Chu Trinh"] },
-      { name: "Hai Bà Trưng", wards: ["Phố Huế", "Đống Mác", "Bạch Đằng", "Bách Khoa", "Trương Định"] },
-      { name: "Đống Đa", wards: ["Cát Linh", "Văn Miếu", "Láng Hạ", "Khâm Thiên", "Thái Hà"] },
-      { name: "Tây Hồ", wards: ["Quảng An", "Xuân La", "Tứ Liên", "Bưởi", "Nhật Tân"] }
+      { name: "Ba Đình", wards: ["Cát Linh", "Điện Biên", "Đội Cấn", "Giảng Võ", "Kim Mã", "Liễu Giai", "Ngọc Hà", "Ngọc Khánh", "Nguyễn Trung Trực", "Phúc Xá", "Quán Thánh", "Thành Công", "Trúc Bạch", "Vĩnh Phúc"] },
+      { name: "Hoàn Kiếm", wards: ["Cửa Đông", "Cửa Nam", "Đồng Xuân", "Hàng Bài", "Hàng Bồ", "Hàng Bông", "Hàng Buồm", "Hàng Đào", "Hàng Gai", "Hàng Mã", "Hàng Trống", "Lý Thái Tổ", "Phan Chu Trinh", "Phúc Tân", "Tràng Tiền", "Trần Hưng Đạo"] },
+      { name: "Đống Đa", wards: ["Bạch Đằng", "Bùi Thị Xuân", "Cát Linh", "Đống Mác", "Hàng Bột", "Khâm Thiên", "Khương Thượng", "Kim Liên", "Láng Hạ", "Láng Thượng", "Nam Đồng", " Ô Chợ Dừa", "Phương Liên", "Phương Mai", "Quang Trung", "Quốc Tử Giám", "Thịnh Quang", "Thổ Quan", "Trung Liệt", "Trung Phụng", "Trung Tự", "Văn Chương", "Văn Miếu"] },
+      { name: "Thanh Xuân", wards: ["Hạ Đình", "Kim Giang", "Khương Đình", "Khương Mai", "Khương Trung", "Nhân Chính", "Phương Liệt", "Thanh Xuân Bắc", "Thanh Xuân Nam", "Thanh Xuân Trung", "Thượng Đình"] },
+      { name: "Cầu Giấy", wards: ["Dịch Vọng", "Dịch Vọng Hậu", "Mai Dịch", "Nghĩa Đô", "Nghĩa Tân", "Quan Hoa", "Trung Hòa", "Yên Hòa", "Xuân La", "Nhật Tân", "Phú Thượng", "Tây Hồ", "Thụy Khuê", "Tứ Liên", "Xuân Đỉnh"] },
+      { name: "Hoàng Mai", wards: ["Đại Kim", "Định Công", "Giáp Bát", "Hoàng Liệt", "Hoàng Văn Thụ", "Lĩnh Nam", "Mai Động", "Tân Mai", "Thanh Trì", "Thịnh Liệt", "Trần Phú", "Tương Mai", "Vĩnh Hưng", "Yên Sở"] },
+      { name: "Hai Bà Trưng", wards: ["Bách Khoa", "Bạch Đằng", "Bạch Mai", "Bùi Thị Xuân", "Đống Mác", "Đồng Nhân", "Đồng Tâm", "Lê Đại Hành", "Minh Khai", "Ngô Thì Nhậm", "Nguyễn Du", "Phạm Đình Hổ", "Phố Huế", "Quỳnh Lôi", "Quỳnh Mai", "Thanh Lương", "Thanh Nhàn", "Trần Hưng Đạo", "Trương Định", "Vĩnh Tuy", "Yên Lãng"] },
+      { name: "Tây Hồ", wards: ["Bưởi", "Nhật Tân", "Phú Thượng", "Quảng An", "Thụy Khuê", "Tứ Liên", "Xuân La", "Yên Phụ"] },
       // Danh sách các quận/huyện khác
     ];
 
