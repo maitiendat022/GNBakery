@@ -20,7 +20,8 @@
         
                 $resultInsert = mysqli_query($connect,$sqlInsert);
                 if(isset($resultInsert) > 0){
-                    header("location: signin.php");
+                    $success = "Bạn đã đăng ký thành công. Đăng nhập tại đây"; 
+                    header("location: signin.php?success=$success");
                 }else{
                     $errorpass = "Registration failed";
                     header("location: signup.php?errorpass=$errorpass");

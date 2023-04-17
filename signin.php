@@ -58,6 +58,16 @@ require './database/connect.php';
               }
               ?>
             </small>
+            <span style="color:green;">
+                <?php
+                if (isset($_GET['success'])) {
+                  echo "{$_GET['success']}";
+                } else {
+                  echo "";
+                }
+                ?>
+              </span>
+            
           </div>
 
           <!-- <div class="checkbox mb-3">
@@ -221,7 +231,12 @@ require './database/connect.php';
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+  <script src="./assets/js/notify.min.js"></script>
+  <script>
+  $('document').ready( function() {
+    $.notify("<?php echo $_SESSION['success']; unset($_SESSION['success']); ?>", "success");
+  } );
+  </script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
   <script src="js/app.js"></script>
 </body>
