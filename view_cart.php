@@ -1,9 +1,5 @@
 <?php 
-session_start();
-if(empty($_SESSION['id'])){
-    header('location:./signin.php');
-    exit();
-}
+
 require './database/connect.php';
 require 'check_user_cart.php';
 

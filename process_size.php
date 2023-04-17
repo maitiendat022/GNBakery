@@ -1,11 +1,8 @@
 <?php
 
-session_start();
-if(empty($_SESSION['id'])){
-    header('location:./signin.php');
-    exit();
-}
 require './database/connect.php';
+
+
 $id = $_GET['id'];
 $size = $_GET['size-btn'];
 
