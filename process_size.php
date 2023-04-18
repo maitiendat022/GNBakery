@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require './database/connect.php';
 
 
@@ -15,7 +15,7 @@ $each = mysqli_fetch_array($result);
 
 if($each['status']==0){
   $_SESSION['success'] = 'Sản phẩm này đã ngừng bán vui lòng chọn sản phẩm khác';
-  header("location: ./index.php");   
+  header("location:index.php");   
   exit;   
 }
 $sqlSize = "select * from products_size where products_size.product_id = '$id' ";
@@ -23,10 +23,10 @@ $resultSize = mysqli_query($connect, $sqlSize);
 
 if(mysqli_num_rows($resultSize) > 1){
     $_SESSION['success'] = 'Vui lòng chọn kích thước';
-    header("location: ./product.php?id=$id");   
+    header("location:product.php?id=$id");   
     exit;   
 }else{
-    header("location: ./view_cart.php?id=$id&size-btn=$size");   
+    header("location:view_cart.php?id=$id&size-btn=$size");   
     exit; 
 }
 
