@@ -56,7 +56,7 @@
                                 <tr>
                                     <th class = "id-product" scope="col">Mã đơn</th>
                                     <th class = "orderer-product" scope="col">Người đặt</th>
-                                    <th class = "recipient-product" scope="col">Người nhận</th>
+                                    <th class = "recipient-product" scope="col">Thông tin người nhận</th>
                                     <th class = "time-product" scope="col">Thời gian đặt</th>
                                     <th class = "status-order"  scope="col">Trạng thái</th>
                                     <th class = "manage-order"  scope="col">Quản lý</th>
@@ -72,9 +72,9 @@
                                         <span class = "nameofyou"><?= $each['name'] ?></span>
                                     </th>
                                     <th scope="col">
-                                       <span class="nameofyou"><?= $each['name_receiver'] ?></span> <br>
-                                       <span><?= $each['phone_receiver'] ?></span> <br>
-                                       <span><?= $each['address_receiver'] ?></span>
+                                       <span class="nameofyou">Tên: <?= $each['name_receiver'] ?></span> <br>
+                                       <span>Sđt: <?= $each['phone_receiver'] ?></span> <br>
+                                       <span>Địa chỉ: <?= $each['address_receiver'] ?></span>
                                     </th>
                                    
                                     <th scope="col"><?= $each['created_at'] ?></th>

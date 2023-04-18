@@ -34,8 +34,8 @@
     <div class="product">
         <div class="product-content">
             <div class="product-content-left">
-                <img class="image-img hide-on-mobile-tablet" src="../../assets/images/products/<?= $each['image'] ?>" data-zoom-image="../../assets/images/products/<?= $each['image'] ?>" />
-                <img class="image-img-mobile" src="../../assets/images/products/<?= $each['image'] ?>"/>
+            <img class="image-img" style="width:100%;" src="../../assets/images/products/<?= $each['image'] ?>" data-zoom-image="../../assets/images/products/<?= $each['image'] ?>" />
+            <img class="image-img-mobile" src="../../assets/images/products/<?= $each['image'] ?>"/>
             </div>
 
             <div class="product-content-right">
@@ -128,8 +128,8 @@
     zoomWindowFadeOut: 500,
     lensFadeIn: 500,
     lensFadeOut: 500,
-    zoomWindowWidth: 200,
-    zoomWindowHeight: 200
+    zoomWindowWidth: 400,
+    zoomWindowHeight: 400
   });
  
     $('.btn-menu').click(function() {

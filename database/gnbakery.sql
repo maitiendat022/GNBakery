@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 16, 2023 at 05:23 PM
+-- Generation Time: Apr 18, 2023 at 04:43 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -109,7 +109,9 @@ INSERT INTO `orders` (`id`, `user_id`, `name_receiver`, `address_receiver`, `pho
 (28, 22, 'Ngan', 'sn 11, Láng Hạ, Đống Đa, Hà Nội', '0397170118', 4, 22, 220000, '2023-04-16 14:44:17', '2023-04-16 14:49:28'),
 (29, 22, 'Ngan', 'sn11, Phố Huế, Hai Bà Trưng, Hà Nội', '0397170118', 3, 1, 260000, '2023-04-16 14:44:35', '2023-04-16 16:38:25'),
 (30, 22, 'Ngan', 'sn11, Văn Miếu, Đống Đa, Hà Nội', '0397170118', 3, 1, 220000, '2023-04-16 14:50:54', '2023-04-16 16:35:20'),
-(31, 22, 'Ngan', 'sn11, Ngọc Hà, Ba Đình, Hà Nội', '0397170118', 2, 1, 440000, '2023-04-16 15:41:36', '2023-04-16 16:38:16');
+(31, 22, 'Ngan', 'sn11, Ngọc Hà, Ba Đình, Hà Nội', '0397170118', 2, 1, 440000, '2023-04-16 15:41:36', '2023-04-16 16:38:16'),
+(32, 4, 'Dat', 'Sn 31/3 Ngõ 236/18, đường Khương Đình, Khương Đình, Thanh Xuân, Hà Nội', '0397170118', 0, NULL, 780000, '2023-04-16 18:19:19', NULL),
+(33, 11, 'Ngan', 'sn31/3, ngõ 236 Khương Đình, Khương Đình, Thanh Xuân, Hà Nội', '0366906111', 1, 11, 85000, '2023-04-18 16:39:30', '2023-04-18 16:41:57');
 
 -- --------------------------------------------------------
 
@@ -153,7 +155,11 @@ INSERT INTO `order_product` (`order_id`, `product_id`, `size`, `price`, `quantit
 (29, 15, 22, 260000, 1),
 (30, 16, 18, 220000, 1),
 (31, 11, 18, 220000, 1),
-(31, 16, 18, 220000, 1);
+(31, 16, 18, 220000, 1),
+(32, 16, 22, 260000, 1),
+(32, 19, 1, 260000, 2),
+(33, 28, 1, 10000, 1),
+(33, 31, 1, 75000, 1);
 
 -- --------------------------------------------------------
 
@@ -192,10 +198,22 @@ INSERT INTO `products` (`id`, `name`, `image`, `description`, `status`, `categor
 (13, 'TIRAMISU CAKE', 'cake_1646494401.jpg', '- Gato,\r\n- Kem tươi mặn vị coffee.\r\nBánh làm từ 3 lớp gato trắng kết hợp với 3 lớp kem mặn vị coffee. Bánh phủ bên ngoài bởi 1 lớp kem tươi trắng rắc bột cacao.', 1, 5, 1, NULL),
 (14, 'OPERA', 'cake_1646494444.jpg', '- Gato,\r\n- Kem bơ vị coffee,\r\n- Socola.\r\nBánh được làm từ 3 lớp gato trắng xen giữa 3 lớp kem bơ vị coffee. Bánh phủ 1 lớp socola ở trên mặt.', 1, 1, 1, NULL),
 (15, 'FRUIT CAKE', 'cake_1646494500.jpg', '- Gato\r\n- Kem TƯƠI, vị coffee\r\nBánh làm từ 3 lớp gato TRẮNG xen giữa 3 lớp kem TƯƠI. Bên ngoài phủ 1 lớp chocolate đen, TRANG TRÍ HOA QUẢ.', 1, 1, 1, NULL),
-(16, 'CAPUCCINO', 'cake_1646494566.jpg', '- Gato,\r\n- Bột mỳ đỏ,\r\n- Kem tươi vị Tiramisu\r\nBánh làm từ 3 lớp gato đỏ xen lẫn 3 lớp kem tươi. Bên ngoài bánh phủ 1 lớp BỘT GATO ĐỎ VÀ TRANG TRÍ HOA QUẢ.', 1, 1, 1, NULL),
-(17, 'COCONUT CAKE', 'cake_1646494617.jpg', '- Thành phần chính:\r\n- Gato,\r\n- Kem tươi mặn vị coffee.\r\nBánh làm từ 3 lớp gato trắng kết hợp với 3 lớp kem mặn vị coffee. Bánh phủ bên ngoài bởi 1 lớp kem tươi trắng rắc bột cacao.', 0, 5, 1, 1),
+(16, 'CAPUCCINO', 'cake_1646494566.jpg', '- Gato,\r\n- Bột mỳ đỏ,\r\n- Kem tươi vị Tiramisu\r\nBánh làm từ 3 lớp gato đỏ xen lẫn 3 lớp kem tươi. Bên ngoài bánh phủ 1 lớp BỘT GATO ĐỎ VÀ TRANG TRÍ HOA QUẢ.', 1, 1, 1, 0),
+(17, 'COCONUT CAKE', 'cake_1646494617.jpg', '- Thành phần chính:\r\n- Gato,\r\n- Kem tươi mặn vị coffee.\r\nBánh làm từ 3 lớp gato trắng kết hợp với 3 lớp kem mặn vị coffee. Bánh phủ bên ngoài bởi 1 lớp kem tươi trắng rắc bột cacao.', 1, 5, 1, 0),
 (18, 'CARAMEL MOIST CHOCOLATE CAKE', 'cake_1646494665.jpg', '- Gato\r\n- Sốt caramel\r\n- Kem tươi\r\nBánh làm từ 3 lớp gato socola xen giữa 3 lớp kem tươi vị socola. Phủ bên ngoài là 1 lớp sốt caramel có vị đắng nhẹ.', 1, 5, 1, 0),
-(19, 'GREENTEA CAKE LOVE2', 'cake_1646466680.jpg', 'Thành phần chính:\r\n- Gato,\r\n- Kem tươi trà xanh ,  vị rượu rum,\r\n- bột Trà xanh.\r\n\r\nBánh làm từ 3 lớp gato trắng xen giữa 3 lớp kem tươi trà xanh  vị rượu rum (nho). Bên ngoài bánh phủ 1 LỚP BỘT TRÀ XANH VÀ TRANG TRÍ HOA QUẢ.', 0, 8, 1, 1);
+(19, 'PUFF PASTRY APPLE PIES', 'cake_1681832535.jpg', 'Thành phần: \r\n\r\n- Bột mỳ\r\n\r\n- Bơ\r\n\r\n- Đường\r\n\r\n- Kem\r\n\r\n- Táo xào\r\n\r\n- Hạt Almon', 1, 8, 1, 0),
+(21, 'BÁNH HOTDOG', 'cake_1681832627.jpg', 'Bột mỳ, bơ, muối, phụ gia, xúc xích.', 1, 8, 1, NULL),
+(22, 'BÁNH RUỐC', 'cake_1681832660.jpg', 'Bột mỳ, trứng, đường, sữa tươi, dầu ăn, bột sữa, chất ổn định, chà bông, sốt trứng.', 1, 8, 1, NULL),
+(23, 'BÁNH MÌ HOA CÚC', 'cake_1681832694.jpg', '', 1, 3, 1, NULL),
+(24, 'BÁNH MÌ BAGUETTE', 'cake_1681832762.jpg', 'Thành phần chính:\r\n\r\n- Bột mỳ\r\n\r\n- Muối\r\n\r\n- Phụ gia', 1, 3, 1, NULL),
+(26, 'SOCOLA ĐEN', 'cake_1681833109.jpg', 'Socola đen, kem whipping, bơ, mật ong, hương bạc hà.', 1, 6, 1, NULL),
+(27, 'SOCOLA TRắNG', 'cake_1681833155.jpg', 'Socola trắng, kem whipping, bơ, mật ong, hương  vani.', 1, 6, 1, NULL),
+(28, 'SOCOLA', 'cake_1681833193.jpg', 'Socola đen, socola trắng, kem whipping, bơ, mật ong, các vị ( nước chanh leo, hương bạc hà, quả vani )', 1, 6, 1, NULL),
+(29, 'RED VELVET COOKIES', 'cake_1681833227.jpg', 'Thành phần:\r\n\r\n- Bột mỳ đỏ,\r\n\r\n- Bơ,\r\n\r\n- Socola,\r\n\r\n- Trứng.', 1, 6, 1, NULL),
+(30, 'GATO CUỘN TÁO XÀO', 'cake_1681833293.jpg', 'Bột mỳ, trứng, đường, bơ, sữa tươi, kem whipping, bột sữa, chất ổn định, lá đông, táo.', 1, 7, 1, NULL),
+(31, 'BÁNH CUỘN CA CAO', 'cake_1681833342.jpg', 'Bột mỳ, trứng, đường, sữa tươi, dầu ăn, bột sữa, kem bơ, bột ca cao.', 1, 7, 1, NULL),
+(32, 'GATO CUỘN TRÀ XANH', 'cake_1681833368.jpg', 'Bột mỳ, trứng, đường, sữa tươi, dầu ăn, bột sữa, kem bơ bột trà xanh.', 1, 7, 1, NULL),
+(33, 'BÔNG LAN TRỨNG MUỐI', 'cake_1681833398.jpg', 'Bột mỳ, đường, trứng, sữa, dầu ăn, bột ngô, trứng muối, chà bông, sốt trứng.', 1, 7, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -215,61 +233,76 @@ CREATE TABLE `products_size` (
 --
 
 INSERT INTO `products_size` (`id`, `product_id`, `size`, `price`) VALUES
-(1, 1, 18, 220000),
-(2, 2, 18, 220000),
-(3, 3, 18, 220000),
-(4, 4, 18, 220000),
-(5, 5, 18, 220000),
-(6, 6, 18, 220000),
-(7, 7, 18, 220000),
-(8, 8, 18, 220000),
-(9, 9, 18, 220000),
-(10, 10, 18, 220000),
-(11, 11, 18, 220000),
-(12, 12, 18, 220000),
-(13, 13, 18, 220000),
-(14, 14, 18, 220000),
-(15, 15, 18, 220000),
-(16, 16, 18, 220000),
-(17, 17, 18, 230000),
-(18, 18, 18, 220000),
-(19, 1, 22, 260000),
-(20, 2, 22, 260000),
-(21, 3, 22, 260000),
-(22, 4, 22, 260000),
-(23, 5, 22, 260000),
-(24, 6, 22, 260000),
-(25, 7, 22, 260000),
-(26, 8, 22, 260000),
-(27, 9, 22, 260000),
-(28, 10, 22, 260000),
-(29, 11, 22, 260000),
-(30, 12, 22, 260000),
-(31, 13, 22, 260000),
-(32, 14, 22, 260000),
-(33, 15, 22, 260000),
-(34, 16, 22, 260000),
-(35, 17, 22, 260000),
-(36, 18, 22, 260000),
-(37, 1, 26, 300000),
-(38, 2, 26, 300000),
-(39, 3, 26, 300000),
-(40, 4, 26, 300000),
-(41, 5, 26, 300000),
-(42, 6, 26, 300000),
-(43, 7, 26, 300000),
-(44, 8, 26, 300000),
-(45, 9, 26, 300000),
-(46, 10, 26, 300000),
-(47, 11, 26, 300000),
-(48, 12, 26, 300000),
-(49, 13, 26, 300000),
-(50, 14, 26, 300000),
-(51, 15, 26, 300000),
-(52, 16, 26, 300000),
-(53, 17, 26, 300000),
-(54, 18, 26, 300000),
-(57, 19, 1, 260000);
+(8, 8, 21, 360000),
+(14, 14, 21, 360000),
+(26, 8, 23, 440000),
+(32, 14, 23, 440000),
+(44, 8, 25, 530000),
+(50, 14, 25, 530000),
+(58, 19, 1, 15000),
+(59, 21, 1, 10000),
+(60, 22, 1, 15000),
+(61, 23, 1, 75000),
+(62, 24, 1, 12000),
+(64, 26, 1, 7000),
+(65, 27, 1, 7000),
+(66, 28, 1, 10000),
+(67, 29, 1, 65000),
+(68, 30, 1, 85000),
+(69, 31, 1, 75000),
+(70, 32, 1, 75000),
+(83, 4, 21, 360000),
+(84, 4, 23, 440000),
+(85, 4, 25, 530000),
+(90, 6, 1, 360000),
+(94, 7, 21, 360000),
+(95, 7, 23, 440000),
+(96, 7, 25, 530000),
+(97, 33, 1, 25000),
+(98, 2, 21, 330000),
+(99, 2, 23, 380000),
+(100, 2, 25, 460000),
+(101, 2, 27, 530000),
+(102, 1, 19, 275000),
+(103, 1, 21, 330000),
+(104, 1, 23, 380000),
+(105, 1, 25, 460000),
+(106, 3, 21, 360000),
+(107, 3, 23, 420000),
+(108, 3, 25, 500000),
+(109, 5, 20, 400000),
+(110, 5, 22, 480000),
+(111, 5, 24, 580000),
+(112, 5, 26, 700000),
+(113, 9, 21, 360000),
+(114, 9, 23, 420000),
+(115, 9, 25, 500000),
+(116, 9, 27, 580000),
+(117, 10, 1, 360000),
+(118, 11, 1, 400000),
+(119, 12, 21, 380000),
+(120, 12, 23, 460000),
+(121, 12, 25, 550000),
+(125, 13, 21, 330000),
+(126, 13, 23, 380000),
+(127, 13, 25, 460000),
+(128, 13, 27, 530000),
+(133, 16, 21, 275000),
+(134, 16, 23, 330000),
+(135, 16, 25, 380000),
+(136, 16, 27, 460000),
+(137, 15, 21, 275000),
+(138, 15, 23, 330000),
+(139, 15, 25, 380000),
+(140, 15, 27, 460000),
+(141, 17, 21, 275000),
+(142, 17, 23, 330000),
+(143, 17, 25, 380000),
+(144, 17, 27, 460000),
+(145, 18, 21, 360000),
+(146, 18, 23, 420000),
+(147, 18, 25, 500000),
+(148, 18, 27, 580000);
 
 -- --------------------------------------------------------
 
@@ -335,7 +368,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `gen
 (18, 'Dat', 'nhanvientest1@gmail.com', '$2y$10$NiswfryePfPbkXu6azBQM.YqXbjc8C3MZXtbHCD1lPoatJ/odAvyu', '0397170118', 'Thái Bình', 'Nam', '2023-03-29', '2023-04-14 16:37:06', NULL, 2, 1, NULL),
 (20, 'Ngan', 'ngan2@gmail.com', '$2y$10$w7Q4tqL.2X6rp7kPRjvW.eGKVGCHQIF29HVkBIlHmEJPW1q69Ufkm', '0397170118', 'Thái Bình', 'Nữ', '2023-03-26', '2023-04-14 16:44:38', NULL, 2, 1, 1),
 (21, 'Ngan', 'ngan2@gmail.com', '$2y$10$wxE0DGcH8pU7I.xPAS1iEuFwX7RQM9amildLrPEUi.NKk2VEFbgdK', NULL, NULL, NULL, NULL, '2023-04-16 14:42:52', NULL, 0, 1, 1),
-(22, 'Ngan', 'ngan1@gmail.com', '$2y$10$H5NI1GKjO5D8sfjgUQ3TdOsN.qxejhkE6YNxKS1/dvLomr47XEMa.', NULL, NULL, NULL, NULL, '2023-04-16 14:43:39', NULL, 0, 0, 1);
+(22, 'Ngan', 'ngan1@gmail.com', '$2y$10$H5NI1GKjO5D8sfjgUQ3TdOsN.qxejhkE6YNxKS1/dvLomr47XEMa.', NULL, NULL, NULL, NULL, '2023-04-16 14:43:39', NULL, 0, 0, 1),
+(23, 'Nam', 'nam@gmail.com', '$2y$10$N7XGHaFP32UZ8yXDJMzbWux7gnwbdl4VQBB7Z1LWeZjKs6/VRoZnS', NULL, NULL, NULL, NULL, '2023-04-17 06:09:13', NULL, 0, 1, NULL),
+(24, 'Nam', 'nam1@gmail.com', '$2y$10$75e4ZHCayxkkSBiUDFSFPurzbR6UHaiscVHdz.4.0I0/7eUoqvZK2', NULL, NULL, NULL, NULL, '2023-04-17 06:09:47', NULL, 0, 1, NULL),
+(25, 'Ly', 'ly123@gmail.com', '$2y$10$WFMya5xIMW7EKKRWXMYqPO7Ov0rLPtBEQEXBRSb0l115zIDAn6VOa', NULL, NULL, NULL, NULL, '2023-04-17 06:15:21', NULL, 0, 1, NULL);
 
 --
 -- Indexes for dumped tables
@@ -417,19 +453,19 @@ ALTER TABLE `category_detail`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `products_size`
 --
 ALTER TABLE `products_size`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -441,7 +477,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
