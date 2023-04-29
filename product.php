@@ -411,7 +411,6 @@ if(mysqli_num_rows($result) > 0) {
       zoomWindowFadeOut: 500,
       lensFadeIn: 500,
       lensFadeOut: 500
-      
     });
   </script>
   <script>

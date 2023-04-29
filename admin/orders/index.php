@@ -114,7 +114,7 @@
                                             <?php
                                             }if($each['status'] == 1){?>
                                             <div class="two_buttons">
-                                                <a href="./update.php?id=<?= $each['id'] ?>&status=3&idUser=<?= $idUser?>&page=<?=$page_current?>" class = "btnBrowser">Giao hàng</a>
+                                                <a onclick="return confirm('Xác nhận giao hàng?')" href="./update.php?id=<?= $each['id'] ?>&status=3&idUser=<?= $idUser?>&page=<?=$page_current?>" class = "btnBrowser">Giao hàng</a>
                                             </div>
                                             <?php
                                             }if($each['status'] == 2 && $level == 2){
@@ -135,8 +135,8 @@
                                             }
                                             if($each['status'] == 0) { ?>
                                             <div class="two_buttons">
-                                                <a href="./update.php?id=<?= $each['id'] ?>&status=1&idUser=<?= $idUser?>&page=<?=$page_current?>" class = "btnBrowser">Duyệt</a>
-                                                <a href="./update.php?id=<?= $each['id'] ?>&status=2&idUser=<?= $idUser?>&page=<?=$page_current?>">Hủy</a>
+                                                <a onclick="return confirm('Bạn chắc chắn muốn duyệt đơn hàng?')" href="./update.php?id=<?= $each['id'] ?>&status=1&idUser=<?= $idUser?>&page=<?=$page_current?>" class = "btnBrowser">Duyệt</a>
+                                                <a onclick="return confirm('Bạn chắc chắn muốn hủy đơn hàng?')" href="./update.php?id=<?= $each['id'] ?>&status=2&idUser=<?= $idUser?>&page=<?=$page_current?>">Hủy</a>
                                             </div>   
                                             <?php } ?>
                                         </div>
