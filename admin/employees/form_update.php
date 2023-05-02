@@ -2,7 +2,7 @@
     require_once '../check_admin_signin.php';
 
     $admin_id = $_SESSION['id'];
-    $page = 'products-insert';
+    $page = 'users';
     require_once '../navbar-vertical.php';
 
     require_once '../../database/connect.php';
